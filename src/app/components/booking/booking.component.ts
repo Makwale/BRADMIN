@@ -3,8 +3,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Booking } from 'src/app/medels/booking.model';
-import { Student } from 'src/app/medels/student.model';
+import { Booking } from 'src/app/models/booking.model';
+import { Student } from 'src/app/models/student.model';
 import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({

@@ -3,7 +3,7 @@ import { DatabaseService } from 'src/app/services/database.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import { Driver } from 'src/app/medels/driver.model';
+import { Driver } from 'src/app/models/driver.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 @Component({
