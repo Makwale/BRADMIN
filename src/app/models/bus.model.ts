@@ -5,14 +5,18 @@ export class Bus{
 
     regno;
 
-    driver;
+    driverid;
 
-    constructor(id, regno, driver){
+    numPassagners;
+
+    constructor(id, regno, driverid?, numPassangers?){
         this.id = id;
 
         this.regno = regno;
 
-        this.driver = driver;
+        this.driverid = driverid;
+
+        this.numPassagners = numPassangers;
 
     }
 }

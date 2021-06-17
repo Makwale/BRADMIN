@@ -45,9 +45,11 @@
 
           <ion-col size="12">
             <ion-item>
-              <ion-label color="ourtheme" position="floating">Assign Driver (Optional)</ion-label>
-              <ion-select formControlName="driverid" cancelText="Cancel" okText="Done" (ionChange)="print()" >
-                <ion-select-option *ngFor="let driver of drivers" [value]="driver.id">{{driver.id}}{{driver.regno}}</ion-select-option>
+              <ion-label color="ourtheme" position="floating" >Assign Driver (Optional)</ion-label>
+              <ion-select color="ourtheme" formControlName="driverid" cancelText="Cancel" okText="Done" (ionChange)="print()" style="width: 400px;" >
+                <ion-select-option (ionClick)="test()" style="width: 800px;" *ngFor="let driver of drivers" [value]="driver.id">
+                  {{driver.id.substring(0,3)}}....{{ driver.id.substring(driver.id.length - 3) }} 
+                  {{driver.firstname.substring(0,1)}} {{driver.lastname}}</ion-select-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -58,7 +60,7 @@
 
     </form>
     <div style="text-align: center; padding-top: 10px;" >
-      <ion-button slot="end" color="ourtheme" (click)="create()" [disabled]="signupForm.status == 'INVALID'" style="margin: auto;">Create</ion-button>
+      <ion-button slot="end" color="ourtheme" (click)="createBus()" [disabled]="signupForm.status == 'INVALID'" style="margin: auto;">Add</ion-button>
     </div>
   
   </div>

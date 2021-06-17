@@ -3,7 +3,7 @@
   <mat-sidenav fixedInViewport fixedTopGap="80" mode="side" class="acc" opened style="width: 300px;" >
 
       <mat-accordion color="primary" >
-        <mat-expansion-panel class="acc" expanded>
+        <mat-expansion-panel class="acc">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <ion-icon size="large" color="light" name="people"></ion-icon>
@@ -82,10 +82,6 @@
             <ion-icon slot="start" name="people"></ion-icon><ion-label>View Students</ion-label>
           </ion-item>
 
-          <ion-item button routerLink="addstudent" color="ourtheme" detail>
-            <ion-icon slot="start" name="person-add"></ion-icon>
-            <ion-label>Add Stuent</ion-label>
-          </ion-item>
         </mat-expansion-panel>
 
         <mat-expansion-panel class="acc">
@@ -111,7 +107,7 @@
   </mat-sidenav>
   <mat-sidenav-content style="margin-left: 300px;">
 
-    <router-outlet></router-outlet>
+    <router-outlet *ngIf="dbs.isToolbarVisible"></router-outlet>
 
   </mat-sidenav-content>
 </mat-sidenav-container>

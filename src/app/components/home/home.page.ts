@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
@@ -6,12 +6,17 @@ import { DatabaseService } from 'src/app/services/database.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements AfterViewInit{
 
   constructor(private dbs: DatabaseService) {}
 
   ngOnInit(){
 
   }
+
+  ngAfterViewInit(){
+    this.dbs.isToolbarVisible = true;
+  }
+  
 
 }

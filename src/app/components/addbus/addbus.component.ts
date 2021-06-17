@@ -44,8 +44,10 @@ export class AddbusComponent implements OnInit {
 
   createBus(){
 
-      this.dbs.createBus(this.signupForm.value["regno"], this.signupForm.value["numPassengers"])
-    
+      if(this.signupForm.value["regno"] == "")
+        this.dbs.createBus(this.signupForm.value["regno"], this.signupForm.value["numPassengers"])
+      else
+      this.dbs.createBus(this.signupForm.value["regno"], this.signupForm.value["numPassengers"] ,this.signupForm.value["driverid"])
     
   }
 
@@ -87,7 +89,7 @@ export class AddbusComponent implements OnInit {
    console.log(this.signupForm)
   }
 
-
+ 
  
 
 }

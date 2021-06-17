@@ -11,17 +11,38 @@ import { Bus } from '../models/bus.model';
   providedIn: 'root'
 })
 export class DatabaseService {
-  createBus(arg0: any, arg1: any) {
-    throw new Error('Method not implemented.');
-  }
+  
   drivers: Driver[] = [];
   students: Student[] = [];
   slots: Slot[] = [];
   bookings: Booking[] = [];
   buses: Bus[] = [];
+  isToolbarVisible = false;
   constructor(private afs: AngularFirestore) { }
 
- 
+  createSlot(from, to, datetime, busid, numPassagners) {
+
+    this.afs.collection("Slot").add({
+      from: from,
+      to: to,
+      date: datetime,
+      busid: busid,
+      avail: numPassagners,
+      booked: 0
+    }).then(()=> {
+      alert("Slot slot created")
+    })
+  }
+
+  createBus(regno, pass, id?) {
+    this.afs.collection("Bus").add({
+      regno: regno,
+      numPassangers: pass,
+      driverid: id? id : ""
+    }).then(() => {
+      alert("Bus is added")
+    })
+  }
 
 
 }

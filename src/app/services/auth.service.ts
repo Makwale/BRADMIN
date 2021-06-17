@@ -13,7 +13,7 @@ import { DatabaseService } from './database.service';
   providedIn: 'root'
 })
 export class AuthService {
-  
+ 
   constructor(private afa: AngularFireAuth, private afs: AngularFirestore,
     private acs: AccountService, private router: Router, private dbs: DatabaseService) { }
 
