@@ -14,7 +14,7 @@ import { DatabaseService } from 'src/app/services/database.service';
 })
 export class BookingComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'firstname', 'lastname', 'studentNumber', 'email', 'status', 'action'];
+  displayedColumns: string[] = ['id', 'date', 'firstname', 'lastname', 'studentNumber', 'email', 'status'];
   dataSource: MatTableDataSource<Booking>;
   bookings: Booking[] = []
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -49,7 +49,7 @@ export class BookingComponent implements OnInit {
           let student = new Student(stid, studentdata["firstname"], studentdata["lastname"],
            studentdata["studentNumber"], studentdata["email"]);
        
-          let booking = new Booking(id, bookingdata["slotid"], student, bookingdata["cancelled"]);
+          let booking = new Booking(id, bookingdata["slotid"], student, bookingdata["cancelled"], new Date());
 
           if(!this.seachBooking(booking)){
             this.dbs.bookings.push(booking);
@@ -70,6 +70,10 @@ export class BookingComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  applyFilter(filter){
+    this.dataSource.filter = filter
   }
 
 }

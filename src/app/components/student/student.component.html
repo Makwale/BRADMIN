@@ -1,6 +1,6 @@
 <mat-form-field style="width: 90%; margin: auto; margin-top: 10px; margin-left: 10px;">
   <mat-label>Seach student</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Search student by id or first name, last name, student number, email " #input>
+  <input matInput (keyup)="applyFilter(filter.value)" #filter placeholder="Search student by id or first name, last name, student number, email " #input>
 </mat-form-field>
 
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 100%;">
@@ -41,7 +41,7 @@
               <mat-icon style="color: #0a4694;">edit</mat-icon>
           </button> 
 
-          <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+          <button (click)="delete(element.id)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
               <mat-icon style="color: red;" color="danger">delete</mat-icon>
           </button> 
       </td>

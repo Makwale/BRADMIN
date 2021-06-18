@@ -60,4 +60,15 @@ export class StudentComponent implements OnInit {
     }
     return false;
   }
+
+  applyFilter(filter){
+    this.dataSource.filter = filter
+  }
+
+  delete(id){
+    if(confirm("Are you sure you want to delete this student?")){
+
+      this.dbs.deleteStudent(id)
+    }
+  }
 }

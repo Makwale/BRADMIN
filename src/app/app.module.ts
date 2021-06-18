@@ -23,6 +23,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { HomePage } from './components/home/home.page';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
@@ -35,6 +36,11 @@ import { AddslotComponent } from './components/addslot/addslot.component';
 import { StudentComponent } from './components/student/student.component';
 import { AddstudentComponent } from './components/addstudent/addstudent.component';
 import { BookingComponent } from './components/booking/booking.component';
+
+import {MatDialog} from '@angular/material/dialog';
+import { DrivereditComponent } from './components/driveredit/driveredit.component';
+import { BuseditComponent } from './components/busedit/busedit.component';
+import { SloteditComponent } from './components/slotedit/slotedit.component';
 
 
 const firebaseConfig = {
@@ -59,8 +65,11 @@ const firebaseConfig = {
     AddslotComponent,
     StudentComponent,
     AddstudentComponent,
+    DrivereditComponent,
+    BuseditComponent,
+    SloteditComponent,
     BookingComponent],
-  entryComponents: [],
+  entryComponents: [ DrivereditComponent],
   imports: [BrowserModule, 
     MatSidenavModule,
     MatToolbarModule,
@@ -73,12 +82,15 @@ const firebaseConfig = {
     MatPaginatorModule,
     FormsModule, 
     ReactiveFormsModule,
+    MatDialogModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule, 
     IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+
+  providers: [MatDialog,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
+
 })
 export class AppModule {}

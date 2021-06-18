@@ -6,14 +6,19 @@ export class Booking{
     slotid;
     student: Student;
     status;
-    constructor(id, slotid, student, status){
+    date
+    constructor(id, slotid, student, status, date?){
 
         this.id = id;
 
+        this.date = date;
+        
         this.slotid = slotid;
 
         this.student = student;
 
         this.status = status ? "Cancelled": "";
+
+     
     }
 }
