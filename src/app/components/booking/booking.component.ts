@@ -19,7 +19,7 @@ export class BookingComponent implements OnInit {
   bookings: Booking[] = []
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort
-
+  isVisible = true;
   constructor(private dbs: DatabaseService, private afs: AngularFirestore) { 
     
   }
@@ -49,7 +49,7 @@ export class BookingComponent implements OnInit {
           let student = new Student(stid, studentdata["firstname"], studentdata["lastname"],
            studentdata["studentNumber"], studentdata["email"]);
        
-          let booking = new Booking(id, bookingdata["slotid"], student, bookingdata["cancelled"], new Date());
+          let booking = new Booking(id, bookingdata["slotid"], student, bookingdata["cancelled"], bookingdata["date"]);
 
           if(!this.seachBooking(booking)){
             this.dbs.bookings.push(booking);
@@ -60,6 +60,8 @@ export class BookingComponent implements OnInit {
         })
 
       }
+
+      this.isVisible = false;
     })
   }
 

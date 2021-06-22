@@ -2,7 +2,10 @@
     <mat-label>Seach Driver</mat-label>
     <input matInput (keyup)="applyFilter(filter.value)" #filter placeholder="Search driver by id or first name, last name, phone number, email " #input>
 </mat-form-field>
-    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 100%;">
+
+<mat-progress-bar *ngIf="isVisible" style="width: 90%; margin: auto;" mode="indeterminate"></mat-progress-bar>
+
+    <table  mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 90%; margin: auto;">
   
       <!-- ID Column -->
       <ng-container matColumnDef="id">
@@ -34,7 +37,7 @@
       </ng-container>
 
       <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+        <th mat-header-cell *matHeaderCellDef > Actions </th>
         <td mat-cell *matCellDef="let element"> 
             <button (click)="openDialog(element)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
                 <mat-icon style="color: #0a4694;">edit</mat-icon>

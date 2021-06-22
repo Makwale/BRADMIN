@@ -19,7 +19,7 @@ export class DriverComponent implements OnInit {
   displayedColumns: string[] = ['id', 'firstname', 'lastname', 'phone', 'email', 'action'];
   dataSource: MatTableDataSource<Driver>;
   drivers: Driver[] = []
-  
+  isVisible = true;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort
@@ -50,7 +50,7 @@ export class DriverComponent implements OnInit {
         }
 
       }
-
+      this.isVisible = false;
       this.dataSource = new MatTableDataSource(this.dbs.drivers)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

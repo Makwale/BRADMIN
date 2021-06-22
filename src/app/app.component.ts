@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
 import { DatabaseService } from './services/database.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { DatabaseService } from './services/database.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private dbs: DatabaseService) {
+  constructor(private dbs: DatabaseService, private auth : AuthService ) {
     dbs.isToolbarVisible
   }
 }

@@ -60,7 +60,7 @@
 
     </form>
     <div style="text-align: center; padding-top: 10px;" >
-      <ion-button slot="end" color="ourtheme" (click)="createBus()" [disabled]="signupForm.status == 'INVALID'" style="margin: auto;">Add</ion-button>
+      <ion-button slot="end" color="ourtheme" (click)="createBus()" [disabled]="signupForm.status == 'INVALID'" style="margin: auto;"><span *ngIf="!auth.isVisible">Add</span><ion-spinner *ngIf="auth.isVisible" name="bubbles"></ion-spinner></ion-button>
     </div>
   
   </div>

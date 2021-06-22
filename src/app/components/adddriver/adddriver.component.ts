@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-adddriver',
@@ -18,7 +20,7 @@ export class AdddriverComponent implements OnInit {
   passenabled = false;
   hasCode = false;
 
-  constructor(private router: Router, private auth: AuthService) { }
+  constructor(private router: Router, private auth: AuthService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.signupForm = new FormBuilder().group({
@@ -55,7 +57,13 @@ export class AdddriverComponent implements OnInit {
       this.auth.createDriver(this.signupForm.value["firstname"], this.signupForm.value["lastname"],
       this.signupForm.value["phone"], this.signupForm.value["email"], this.signupForm.value["password"])
     }else{
-      alert("Passwords do not match")
+   
+      
+      this.snackBar.open("Passwords do not match", "", {
+        duration: 3000,
+        horizontalPosition: "end",
+        verticalPosition: 'top'
+      })
     }
     
   }

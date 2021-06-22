@@ -10,17 +10,36 @@ import { HomePage } from './components/home/home.page';
 import { DriverComponent } from './components/driver/driver.component';
 import { SlotComponent } from './components/slot/slot.component';
 import { StudentComponent } from './components/student/student.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
+import { UnauthComponent } from './components/unauth/unauth.component';
 
 const routes: Routes = [
   {
     path: '',
+    component: LoginComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: "unauth",
+    component: UnauthComponent,
+  },
+  {
+    path: 'home',
     component: HomePage,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
         component: DriverComponent
       },
-
+      {
+        path: 'driver',
+        component: DriverComponent
+      },
       {
         path: 'adddriver',
         component: AdddriverComponent

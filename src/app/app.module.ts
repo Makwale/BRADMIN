@@ -24,6 +24,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSortModule} from '@angular/material/sort';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { HomePage } from './components/home/home.page';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
@@ -41,6 +44,8 @@ import {MatDialog} from '@angular/material/dialog';
 import { DrivereditComponent } from './components/driveredit/driveredit.component';
 import { BuseditComponent } from './components/busedit/busedit.component';
 import { SloteditComponent } from './components/slotedit/slotedit.component';
+import { LoginComponent } from './components/login/login.component';
+import { UnauthComponent } from './components/unauth/unauth.component';
 
 
 const firebaseConfig = {
@@ -68,7 +73,8 @@ const firebaseConfig = {
     DrivereditComponent,
     BuseditComponent,
     SloteditComponent,
-    BookingComponent],
+    BookingComponent,
+    LoginComponent],
   entryComponents: [ DrivereditComponent],
   imports: [BrowserModule, 
     MatSidenavModule,
@@ -81,8 +87,11 @@ const firebaseConfig = {
     MatInputModule,
     MatPaginatorModule,
     FormsModule, 
+    MatSortModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatProgressBarModule,
+    MatSnackBarModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,

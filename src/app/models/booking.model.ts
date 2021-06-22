@@ -19,6 +19,7 @@ export class Booking{
 
         this.status = status ? "Cancelled": "";
 
+        this.date = date.toDate()
      
     }
 }

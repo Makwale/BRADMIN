@@ -21,7 +21,7 @@ export class BusComponent implements OnInit {
   buses: Bus[] = []
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort
-
+  isVisible = true;
   constructor(private dbs: DatabaseService, private afs: AngularFirestore, public dialog: MatDialog) { 
     
   }
@@ -69,7 +69,7 @@ export class BusComponent implements OnInit {
             })
         }
 
-        
+        this.isVisible = false;
       }
 
       

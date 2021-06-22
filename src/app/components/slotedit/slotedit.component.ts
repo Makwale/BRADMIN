@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Bus } from 'src/app/models/bus.model';
 import { Driver } from 'src/app/models/driver.model';
@@ -24,7 +25,8 @@ export class SloteditComponent implements OnInit {
   numPassangers: number;
 
   constructor(private df: MatDialogRef<Slot>, private router: Router, private auth: AuthService, private dbs: DatabaseService,
-    private afs: AngularFirestore,  @Inject(MAT_DIALOG_DATA) public slot: Slot) { }
+    private afs: AngularFirestore,  @Inject(MAT_DIALOG_DATA) public slot: Slot,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getBuss()
@@ -59,6 +61,11 @@ export class SloteditComponent implements OnInit {
 
     if(this.signupForm.value["from"] == this.signupForm.value["to"]){
       alert("Source and Destination cannot be the same")
+      this.snackBar.open("Source and Destination cannot be the same", "", {
+        duration: 3000,
+        horizontalPosition: "end",
+        verticalPosition: 'top'
+      })
     }else{
 
       this.dbs.updateSlot(this.slot.id,this.signupForm.value["from"], this.signupForm.value["to"],

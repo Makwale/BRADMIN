@@ -8,17 +8,21 @@ import { AngularFirestore,
 import { AccountService } from './account.service';
 import { Router } from '@angular/router';
 import { DatabaseService } from './database.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
- 
+  
+  isAuthorised: boolean = false;
+  isVisible = false;
   constructor(private afa: AngularFireAuth, private afs: AngularFirestore,
-    private acs: AccountService, private router: Router, private dbs: DatabaseService) { }
+    private acs: AccountService, private router: Router,
+    private snackBar: MatSnackBar) { }
 
   createDriver(name: string, surname: string, phone: number, email: string, password: string) {
-   
+    this.isVisible = true
     this.afa.createUserWithEmailAndPassword( email, password).then( userCredentials => {
       let id = userCredentials.user.uid;
       this.afs.collection("Driver").doc(id).set({
@@ -27,15 +31,56 @@ export class AuthService {
         phone: phone,
         email: email,
       }).then( res => {
-        
-        alert("Bus driver profile created")
-      }).catch( error => {
-        alert( error.message)
 
+        this.snackBar.open("Driver profile is created", "", {
+          duration: 3000,
+          horizontalPosition: "end",
+          verticalPosition: 'top'
+        })
+
+        this.isVisible = false;
+        
+      }).catch( error => {
+        
+        this.snackBar.open(error.message, "", {
+          duration: 3000,
+          horizontalPosition: "end",
+          verticalPosition: 'top'
+        })
+        this.isVisible = false
       })
 
     }).catch( error => {
-      alert(error.message)
+      this.snackBar.open(error.message, "", {
+        duration: 3000,
+        horizontalPosition: "end",
+        verticalPosition: 'top'
+      })
+      this.isVisible = false
+    })
+  }
+  signin(email, password) {
+    this.isVisible = true
+    this.afa.signInWithEmailAndPassword(email, password).then(res => {
+     
+      this.afs.collection("Admin").snapshotChanges().subscribe(data => {
+        if(data[0].payload.doc.id == res.user.uid){
+          this.isAuthorised = true
+          this.isVisible = false
+          this.router.navigateByUrl("home")
+          
+        }else{
+          this.isVisible = false
+          this.router.navigateByUrl("home")
+        }
+      })
+    }).catch(error => {
+      this.snackBar.open(error.message, "", {
+        duration: 3000,
+        horizontalPosition: "end",
+        verticalPosition: 'top'
+      })
+      this.isVisible = false;
     })
   }
 }

@@ -18,7 +18,7 @@ export class StudentComponent implements OnInit {
   students: Student[] = []
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort
-
+  isVisible = true;
   constructor(private dbs: DatabaseService, private afs: AngularFirestore) { 
     
   }
@@ -49,6 +49,8 @@ export class StudentComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.dbs.students)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+
+      this.isVisible = false;
     })
   }
 
