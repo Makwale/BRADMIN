@@ -3,7 +3,7 @@ export class Slot{
     id;
     from;
     to;
-    date;
+    date: Date;
     busid;
     avail;
     booked;

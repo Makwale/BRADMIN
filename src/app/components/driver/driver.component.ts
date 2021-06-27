@@ -29,42 +29,25 @@ export class DriverComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getDrivers()
+
+    this.dbs.getDrivers()
    
   }
+
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
-  getDrivers(){
-    this.afs.collection("Driver").snapshotChanges().subscribe(data =>{
-      for(let dr of data){
-        let id = dr.payload.doc.id;
-        let driverdata = dr.payload.doc.data();
-
-        let driver = new Driver(id, driverdata["firstname"], driverdata["lastname"], driverdata["phone"], driverdata["email"]);
-       
-        if(!this.searchDriver(driver)){
-          this.dbs.drivers.push(driver);
-        }
-
-      }
-      this.isVisible = false;
-      this.dataSource = new MatTableDataSource(this.dbs.drivers)
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    })
-  }
-
-  searchDriver(driver: Driver){
-    for(let dr of this.dbs.drivers){
-      if(dr.id == driver.id){
-        return true;
-      }
+    
+   setTimeout(() => {
+    for(let driver of this.dbs.drivers){
+      console.log(driver)
     }
-    return false;
+     this.dataSource = new MatTableDataSource(this.dbs.drivers)    
+     this.dataSource.paginator = this.paginator;
+     this.dataSource.sort = this.sort;
+   }, 2000)
   }
+
+ 
+
 
   deleteDriver(id){
     if(confirm("Are you sure you want to delete this drive")){

@@ -1,14 +1,14 @@
 
 export class Driver{
-    id
+    id: string;
 
-    firstname;
+    firstname: string;
 
-    lastname;
+    lastname: string;
 
-    phone;
+    phone: string;
 
-    email;
+    email: string;
     constructor(id, firstname, lastname, phone, email){
         this.id = id;
 

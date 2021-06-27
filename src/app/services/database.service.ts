@@ -201,5 +201,137 @@ export class DatabaseService {
     })
   }
  
+  getDrivers(){
+    
+    this.afs.collection("Driver").snapshotChanges().subscribe(data =>{
+      for(let dr of data){
+        let id = dr.payload.doc.id;
+        let driverdata = dr.payload.doc.data();
+
+        let driver = new Driver(id, driverdata["firstname"], driverdata["lastname"], driverdata["phone"], driverdata["email"]);
+       
+        if(!this.searchDriver(driver)){
+          this.drivers.push(driver);
+        }
+
+      }
+      
+    })
+  }
+
+  
+
+  searchDriver(driver: Driver){
+    for(let dr of this.drivers){
+      if(dr.id == driver.id){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  getBuss(){
+    this.afs.collection("Bus").snapshotChanges().subscribe(data =>{
+      for(let dr of data){
+        let id = dr.payload.doc.id;
+        let busdata = dr.payload.doc.data();
+        
+        if(busdata["driverid"] == "" || busdata["driverid"] == undefined){
+          
+          let bus = new Bus(id, busdata["regno"], "", busdata["numPassangers"]);
+           
+            if(!this.searchBus(bus)){
+              this.buses.push(bus);
+
+            }
+         
+        }else{
+         
+            this.afs.collection("Driver").doc(busdata["driverid"]).snapshotChanges().subscribe(data =>{
+              
+              let driverdata = data.payload.data();
+      
+              let driver = new Driver(busdata["driverid"], driverdata["firstname"], driverdata["lastname"], driverdata["phone"], driverdata["email"]);
+             
+              let bus = new Bus(id, busdata["regno"], driver.id, busdata["numPassangers"] );
+             
+              if(!this.searchBus(bus)){
+             
+                this.buses.push(bus);
+               
+              }
+             
+            })
+        }
+
+      }
+
+      
+
+    })
+  }
+
+  searchBus(bus: Bus){
+    for(let dr of this.buses){
+      if(dr.id == bus.id){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  getslots(){
+    this.afs.collection("Slot").snapshotChanges().subscribe(data =>{
+      for(let dr of data){
+        let id = dr.payload.doc.id;
+        let slotdata = dr.payload.doc.data();
+
+        let slot = new Slot(id, slotdata["from"], slotdata["to"], slotdata["date"], slotdata["busid"], 
+        slotdata["avail"], slotdata["booked"]);
+       
+        if(!this.searchslot(slot)){
+          this.slots.push(slot);
+        }
+
+      }
+
+   
+    })
+  }
+
+  searchslot(slot: Slot){
+    for(let dr of this.slots){
+      if(dr.id == slot.id){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  getStudents(){
+    this.afs.collection("Student").snapshotChanges().subscribe(data =>{
+      for(let dr of data){
+        let id = dr.payload.doc.id;
+        let driverdata = dr.payload.doc.data();
+
+        let student = new Student(id, driverdata["firstname"], driverdata["lastname"], driverdata["studentNumber"], driverdata["email"]);
+       
+        if(!this.searchStudent(student)){
+          this.students.push(student);
+        }
+
+      }
+
+    })
+  }
+
+  searchStudent(student: Student){
+    for(let dr of this.students){
+      if(dr.id == student.id){
+        return true;
+      }
+    }
+    return false;
+  }
 
 }

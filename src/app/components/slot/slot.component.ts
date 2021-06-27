@@ -27,46 +27,21 @@ export class SlotComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getslots()
+
+    this.dbs.getslots()
    
   }
+
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
 
-  getslots(){
-    this.afs.collection("Slot").snapshotChanges().subscribe(data =>{
-      for(let dr of data){
-        let id = dr.payload.doc.id;
-        let slotdata = dr.payload.doc.data();
-
-        let slot = new Slot(id, slotdata["from"], slotdata["to"], slotdata["date"], slotdata["busid"], 
-        slotdata["avail"], slotdata["booked"]);
-       
-        if(!this.searchslot(slot)){
-          this.dbs.slots.push(slot);
-        }
-
-      }
-
+    setTimeout(()=> {
       this.dataSource = new MatTableDataSource(this.dbs.slots)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-
-      this.isVisible = false;
-    })
+    },2000)
   }
 
-  searchslot(slot: Slot){
-    for(let dr of this.dbs.slots){
-      if(dr.id == slot.id){
-        return true;
-      }
-    }
-    return false;
-  }
-
+ 
   applyFilter(filter){
     this.dataSource.filter = filter
   }

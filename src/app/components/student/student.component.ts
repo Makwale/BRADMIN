@@ -24,44 +24,20 @@ export class StudentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getDrivers()
+    this.dbs.getStudents()
    
   }
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
 
-  getDrivers(){
-    this.afs.collection("Student").snapshotChanges().subscribe(data =>{
-      for(let dr of data){
-        let id = dr.payload.doc.id;
-        let driverdata = dr.payload.doc.data();
-
-        let student = new Student(id, driverdata["firstname"], driverdata["lastname"], driverdata["studentNumber"], driverdata["email"]);
-       
-        if(!this.searchDriver(student)){
-          this.dbs.students.push(student);
-        }
-
-      }
-
+    setTimeout(() => {
       this.dataSource = new MatTableDataSource(this.dbs.students)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-
-      this.isVisible = false;
-    })
+    }, 2000)
+    
   }
 
-  searchDriver(student: Student){
-    for(let dr of this.dbs.students){
-      if(dr.id == student.id){
-        return true;
-      }
-    }
-    return false;
-  }
+  
 
   applyFilter(filter){
     this.dataSource.filter = filter

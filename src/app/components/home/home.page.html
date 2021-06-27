@@ -26,6 +26,11 @@
               <ion-icon slot="start" name="person-add"></ion-icon>
               <ion-label>Add Driver</ion-label>
             </ion-item>
+
+            <ion-item button color="ourtheme" detail (click)="generate('d')">
+              <ion-icon name="download" slot="start"></ion-icon>
+              <ion-label>Report as pdf</ion-label>
+            </ion-item>
           </mat-expansion-panel>
 
           <mat-expansion-panel class="acc" >
@@ -45,6 +50,11 @@
             <ion-item button routerLink="addbus" color="ourtheme" detail>
               <ion-icon slot="start" name="add"></ion-icon>
               <ion-label>Add Bus</ion-label>
+            </ion-item>
+
+            <ion-item button color="ourtheme" detail (click)="generate('b')">
+              <ion-icon name="download" slot="start"></ion-icon>
+              <ion-label>Report as pdf</ion-label>
             </ion-item>
           </mat-expansion-panel>
 
@@ -68,6 +78,11 @@
               <ion-icon slot="start" name="add"></ion-icon>
               <ion-label>Add Slot</ion-label>
             </ion-item>
+
+            <ion-item button color="ourtheme" detail (click)="generate('sl')">
+              <ion-icon name="download" slot="start"></ion-icon>
+              <ion-label>Report as pdf</ion-label>
+            </ion-item>
           </mat-expansion-panel>
 
           <mat-expansion-panel class="acc" >
@@ -83,6 +98,11 @@
             
             <ion-item button routerLink="student" color="ourtheme" detail>
               <ion-icon slot="start" name="people"></ion-icon><ion-label>View Students</ion-label>
+            </ion-item>
+
+            <ion-item button color="ourtheme" detail (click)="generate('st')">
+              <ion-icon name="download" slot="start"></ion-icon>
+              <ion-label>Report as pdf</ion-label>
             </ion-item>
 
           </mat-expansion-panel>

@@ -3,6 +3,7 @@
     <input matInput (keyup)="applyFilter(filter.value)" #filter placeholder="Search driver by id or first name, last name, phone number, email " #input>
 </mat-form-field>
 
+
 <mat-progress-bar *ngIf="isVisible" style="width: 90%; margin: auto;" mode="indeterminate"></mat-progress-bar>
 
     <table  mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 90%; margin: auto;">

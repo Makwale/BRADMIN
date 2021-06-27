@@ -27,74 +27,23 @@ export class BusComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getBuss()
+    this.dbs.getBuss()
    
   }
   ngAfterViewInit() {
-    this.sortAndPaginater()
+
+    setTimeout(()=> {
+      this.dataSource = new MatTableDataSource(this.dbs.buses)
+       
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }, 2000)
+    
   }
 
-  getBuss(){
-    this.afs.collection("Bus").snapshotChanges().subscribe(data =>{
-      for(let dr of data){
-        let id = dr.payload.doc.id;
-        let busdata = dr.payload.doc.data();
-        
-        if(busdata["driverid"] == "" || busdata["driverid"] == undefined){
-          
-          let bus = new Bus(id, busdata["regno"], "", busdata["numPassangers"]);
-           
-            if(!this.searchBus(bus)){
-              this.dbs.buses.push(bus);
-              this.sortAndPaginater()
-
-            }
-         
-        }else{
-         
-            this.afs.collection("Driver").doc(busdata["driverid"]).snapshotChanges().subscribe(data =>{
-              
-              let driverdata = data.payload.data();
-      
-              let driver = new Driver(busdata["driverid"], driverdata["firstname"], driverdata["lastname"], driverdata["phone"], driverdata["email"]);
-             
-              let bus = new Bus(id, busdata["regno"], driver.id, busdata["numPassangers"] );
-             
-              if(!this.searchBus(bus)){
-             
-                this.dbs.buses.push(bus);
-                this.sortAndPaginater()
-              }
-             
-            })
-        }
-
-        this.isVisible = false;
-      }
-
-      
-
-    })
-  }
-
-  searchBus(bus: Bus){
-    for(let dr of this.dbs.buses){
-      if(dr.id == bus.id){
-        return true;
-      }
-    }
-    return false;
-  }
-
+  
   applyFilter(filter){
     this.dataSource.filter = filter;
-  }
-
-  sortAndPaginater(){
-        this.dataSource = new MatTableDataSource(this.dbs.buses)
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-
   }
 
   deleteBus(id){
