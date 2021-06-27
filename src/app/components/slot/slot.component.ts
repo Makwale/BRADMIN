@@ -38,6 +38,7 @@ export class SlotComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.dbs.slots)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.isVisible = false;
     },2000)
   }
 

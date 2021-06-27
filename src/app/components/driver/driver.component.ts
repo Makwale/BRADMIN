@@ -8,6 +8,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import {MatDialog} from '@angular/material/dialog';
 import { DrivereditComponent } from '../driveredit/driveredit.component';
+
 @Component({
   selector: 'app-driver',
   templateUrl: './driver.component.html',
@@ -37,12 +38,11 @@ export class DriverComponent implements OnInit {
   ngAfterViewInit() {
     
    setTimeout(() => {
-    for(let driver of this.dbs.drivers){
-      console.log(driver)
-    }
+    
      this.dataSource = new MatTableDataSource(this.dbs.drivers)    
      this.dataSource.paginator = this.paginator;
      this.dataSource.sort = this.sort;
+     this.isVisible = false;
    }, 2000)
   }
 

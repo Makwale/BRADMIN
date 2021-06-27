@@ -31,6 +31,7 @@ export class HomePage implements AfterViewInit{
       orientation: 'l',
     });
     let index = 1;
+    
     if(cat == 'd'){
       name = "Drivers Report.pdf"
 
@@ -125,10 +126,6 @@ export class HomePage implements AfterViewInit{
 
 
     doc.save(name)
-
-    // doc.table(10,10,[{name: "EMMANUEL"}],[],null).save(name)
-    // doc.text(report, 10, 10);
-   
 
     
   }

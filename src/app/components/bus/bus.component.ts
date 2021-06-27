@@ -37,6 +37,7 @@ export class BusComponent implements OnInit {
        
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.isVisible = false;
     }, 2000)
     
   }
