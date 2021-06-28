@@ -30,7 +30,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomePage,
-    canActivate: [AuthGuard],
+    canActivate: [],
     children: [
       {
         path: '',

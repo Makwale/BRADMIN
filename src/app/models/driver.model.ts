@@ -16,7 +16,7 @@ export class Driver{
 
         this.lastname = lastname;
 
-        this.phone = phone
+        this.phone = phone 
 
         this.email = email;
     }

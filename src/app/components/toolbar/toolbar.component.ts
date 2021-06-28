@@ -17,9 +17,11 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {}
 
   logout(){
+   
     this.afa.signOut().then( res => {
       this.auth.isAuthorised = false;
       this.dbs.isToolbarVisible = false;
+      
       this.router.navigateByUrl("login")
     })
   }

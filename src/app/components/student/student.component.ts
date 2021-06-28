@@ -48,6 +48,10 @@ export class StudentComponent implements OnInit {
     if(confirm("Are you sure you want to delete this student?")){
 
       this.dbs.deleteStudent(id)
+      this.dbs.students = this.dbs.students.filter( student => student.id != id);
+      this.dataSource = new MatTableDataSource(this.dbs.students)
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }
   }
 }

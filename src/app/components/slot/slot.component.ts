@@ -48,7 +48,14 @@ export class SlotComponent implements OnInit {
   }
 
   delete(id){
-    if(confirm("Are you sure you want to delete this slot?")){this.dbs.deletSlot(id)}
+    if(confirm("Are you sure you want to delete this slot?")){
+      this.dbs.deletSlot(id)
+      
+      this.dbs.slots = this.dbs.slots.filter(slot => slot.id != id)
+      this.dataSource = new MatTableDataSource(this.dbs.slots)
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
   }
 
   openDialog(slot) {

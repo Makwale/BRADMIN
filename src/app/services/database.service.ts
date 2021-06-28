@@ -334,4 +334,37 @@ export class DatabaseService {
     return false;
   }
 
+  getBookings(){
+    this.afs.collection("Booking").snapshotChanges().subscribe(data =>{
+      for(let dr of data){
+        let id = dr.payload.doc.id;
+        let bookingdata = dr.payload.doc.data();
+
+        this.afs.collection("Student").doc(bookingdata["studentid"]).snapshotChanges().subscribe( data => {
+          let stid = data.payload.id;
+          let studentdata = data.payload.data();
+          let student = new Student(stid, studentdata["firstname"], studentdata["lastname"],
+           studentdata["studentNumber"], studentdata["email"]);
+       
+          let booking = new Booking(id, bookingdata["slotid"], student, bookingdata["cancelled"], bookingdata["date"]);
+
+          if(!this.seachBooking(booking)){
+            this.bookings.push(booking);
+          }
+        })
+
+      }
+
+    })
+  }
+
+  seachBooking(booking: Booking){
+    for(let dr of this.bookings){
+      if(dr.id == booking.id){
+        return true;
+      }
+    }
+    return false;
+  }
+
 }

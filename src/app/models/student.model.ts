@@ -1,22 +1,23 @@
 
 export class Student{
-    id
+    id: string;
 
-    firstname;
+    firstname : string;
 
-    lastname;
+    lastname: string;
 
-    studentNumber;
+    studentNumber: number;
 
-    email;
+    email: string;
     constructor(id, firstname, lastname, studentNumber, email){
+        
         this.id = id;
 
         this.firstname = firstname;
 
         this.lastname = lastname;
 
-        this.studentNumber = studentNumber
+        this.studentNumber = studentNumber ? studentNumber : "N/A"
 
         this.email = email;
     }

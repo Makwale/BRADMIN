@@ -14,10 +14,16 @@ export class HomePage implements AfterViewInit{
   constructor(private dbs: DatabaseService) {}
 
   ngOnInit(){
+
     this.dbs.getDrivers();
+
     this.dbs.getBuss();
+
     this.dbs.getslots();
+
     this.dbs.getStudents()
+
+    this.dbs.getBookings()
   }
 
   ngAfterViewInit(){
@@ -75,7 +81,7 @@ export class HomePage implements AfterViewInit{
 
     }else if(cat == 'sl'){
 
-      console.log(this.dbs.slots)
+
 
       name = "Slots Report.pdf"
 
@@ -122,12 +128,34 @@ export class HomePage implements AfterViewInit{
         index++;
       }
 
+    }else if(cat == "bk"){
+      
+      name = "Bookings Report.pdf"
+
+
+      doc.cell(10,10,80,10,"Id", index, "left")
+      doc.cell(10,10,70,10,"Booking Date & time".toUpperCase(), index, "left")
+      doc.cell(10,10,70,10,"Initial & Last Name".toUpperCase(), index, "left")
+      doc.cell(10,10,50,10,"Student No".toUpperCase(), index, "left")
+        
+      index++;
+
+      for(let booking of this.dbs.bookings){
+      
+        doc.cell(10,10,80,10,booking.id, index, "left")
+        doc.cell(10,10,70,10,booking.date.toLocaleString(), index, "left")
+        doc.cell(10,10,70,10,`${booking.student.firstname.toUpperCase().substring(0,1)} ${booking.student.lastname.toUpperCase()}`, index, "left")
+        doc.cell(10,10,50,10,String(booking.student.studentNumber), index, "left")
+        
+        index++;
+      }
+
     }
 
+    
 
     doc.save(name)
 
-    
   }
   
 

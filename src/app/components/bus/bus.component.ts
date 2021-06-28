@@ -49,10 +49,12 @@ export class BusComponent implements OnInit {
 
   deleteBus(id){
     if(confirm("Are you sure you want to delete this bus?")){
-
-      this.dbs.buses = this.dbs.buses.filter( bus => bus.id != id)
-
       this.dbs.deleteBus(id);
+      this.dbs.buses = this.dbs.buses.filter( bus => bus.id != id)
+      this.dataSource = new MatTableDataSource(this.dbs.buses)
+       
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }
   }
 

@@ -52,6 +52,10 @@ export class DriverComponent implements OnInit {
   deleteDriver(id){
     if(confirm("Are you sure you want to delete this drive")){
       this.dbs.deleteDriver(id)
+      this.dbs.drivers = this.dbs.drivers.filter( driver => driver.id != id);
+      this.dataSource = new MatTableDataSource(this.dbs.drivers)    
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }
   }
 

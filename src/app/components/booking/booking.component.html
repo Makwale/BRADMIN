@@ -21,13 +21,13 @@
     <!-- Progress Column -->
     <ng-container matColumnDef="firstname">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.student.firstname}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.student.firstname | uppercase}} </td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="lastname">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.student.lastname}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.student.lastname | uppercase}} </td>
     </ng-container>
 
     <!-- Fruit Column -->
