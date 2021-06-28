@@ -65,18 +65,79 @@ export class DatabaseService {
   createBus(regno, pass, id?) {
     this.auth.isVisible = true;
 
-    this.afs.collection("Bus").add({
-      regno: regno,
-      numPassangers: pass,
-      driverid: id? id : ""
-    }).then(() => {
-      this.snackBar.open("Bus is added", "", {
-        duration: 3000,
+    if(this.searchBusByReg(regno)){
+      this.snackBar.open(`Bus with registration number ${regno} is already added`, "", {
+        duration: 5000,
         horizontalPosition: "end",
         verticalPosition: 'top'
+      
       })
-      this.auth.isVisible = false
-    })
+    this.auth.isVisible = false;
+      
+    }else{
+      if(id != "" && id != undefined){
+        if(this.searchAssignedDrivers(id)){
+          this.snackBar.open("Bus driver cannot be assigned to more than 1 bus", "", {
+            duration: 5000,
+            horizontalPosition: "end",
+            verticalPosition: 'top'
+          
+          })
+    
+          this.auth.isVisible = false;
+        }else{
+          this.afs.collection("Bus").add({
+            regno: regno,
+            numPassangers: pass,
+            driverid: id 
+          }).then(() => {
+            this.snackBar.open("Bus is added", "", {
+              duration: 3000,
+              horizontalPosition: "end",
+              verticalPosition: 'top'
+            })
+            this.auth.isVisible = false
+          })
+      }
+    }else{
+
+      this.afs.collection("Bus").add({
+        regno: regno,
+        numPassangers: pass,
+        driverid: ""
+      }).then(() => {
+        this.snackBar.open("Bus is added", "", {
+          duration: 3000,
+          horizontalPosition: "end",
+          verticalPosition: 'top'
+        })
+        this.auth.isVisible = false
+      })
+    }
+
+   
+    }
+
+     
+  }
+
+  searchBusByReg(regno){
+    for(let bus of this.buses){
+      if(bus.regno == regno){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  searchAssignedDrivers(id){
+    for(let bus of this.buses){
+      if(bus.driverid == id){
+        return true;
+      }
+    }
+
+    false;
   }
   
   deleteDriver(id) {
@@ -186,19 +247,68 @@ export class DatabaseService {
 
     this.auth.isVisible = true;
 
-    this.afs.collection("Bus").doc(id).update({
-      regno: regno,
-      numPassangers: pass,
-      driverid: drid
-    }).then(() => {
-      this.snackBar.open("Bus is updated", "", {
-        duration: 3000,
-        horizontalPosition: "end",
-        verticalPosition: 'top'
-      })
-
-      this.auth.isVisible = false
-    })
+      if(drid != "" && drid != undefined){
+        if(this.searchAssignedDrivers(drid)){
+          this.snackBar.open("Bus driver cannot be assigned to more than 1 bus", "", {
+            duration: 5000,
+            horizontalPosition: "end",
+            verticalPosition: 'top'
+          
+          })
+          
+          this.afs.collection("Bus").doc(id).update({
+            regno: regno,
+            numPassangers: pass,
+          }).then(() => {
+            this.snackBar.open("Bus is updated", "", {
+              duration: 3000,
+              horizontalPosition: "end",
+              verticalPosition: 'top'
+            })
+      
+            this.auth.isVisible = false
+          })
+    
+          this.auth.isVisible = false;
+        }else{
+  
+         this.buses.filter(bus => {
+            if(bus.id == id){
+              bus.driverid = drid;
+            }
+          })
+  
+          this.afs.collection("Bus").doc(id).update({
+            regno: regno,
+            numPassangers: pass,
+            driverid: drid
+          }).then(() => {
+            this.snackBar.open("Bus is updated", "", {
+              duration: 3000,
+              horizontalPosition: "end",
+              verticalPosition: 'top'
+            })
+      
+            this.auth.isVisible = false
+          })
+        }
+      }else{
+  
+        this.afs.collection("Bus").doc(id).update({
+          regno: regno,
+          numPassangers: pass
+        }).then(() => {
+          this.snackBar.open("Bus is updated", "", {
+            duration: 3000,
+            horizontalPosition: "end",
+            verticalPosition: 'top'
+          })
+    
+          this.auth.isVisible = false
+        })
+  
+      }
+    
   }
  
   getDrivers(){

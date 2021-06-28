@@ -84,9 +84,5 @@ export class AddbusComponent implements OnInit {
     return false;
   }
 
-  print(){
-    // this.signupForm.controls["driverid"].setValue(this.driverid)
-   console.log(this.signupForm)
-  }
 
 }
