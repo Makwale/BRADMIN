@@ -27,6 +27,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSortModule} from '@angular/material/sort';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { HomePage } from './components/home/home.page';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
@@ -92,6 +93,7 @@ const firebaseConfig = {
     MatDialogModule,
     MatProgressBarModule,
     MatSnackBarModule,
+    MatCheckboxModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,

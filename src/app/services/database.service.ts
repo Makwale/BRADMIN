@@ -13,8 +13,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class DatabaseService {
-  
- 
+
   drivers: Driver[] = [];
   students: Student[] = [];
   slots: Slot[] = [];
@@ -476,5 +475,21 @@ export class DatabaseService {
     }
     return false;
   }
+
+  deleteAllDrivers(id) {
+    this.afs.collection("Driver").doc(id).delete()
+  }
+
+  deleteAllBuses(id) {
+    this.afs.collection("Bus").doc(id).delete()
+  }
+  deleteAllBookings(id) {
+    this.afs.collection("Booking").doc(id).delete()
+  }
+
+  deleteAllSlots(id) {
+    this.afs.collection("Slot").doc(id).delete()
+  }
+  
 
 }
