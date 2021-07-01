@@ -59,6 +59,19 @@ export class DatabaseService {
       })
       this.auth.isVisible = false
     })
+
+    this.slots.filter( slot => {
+      if(slot.id == id){
+        
+        slot.from = from;
+        
+        slot.to = to;
+
+        slot.date = date;
+
+        slot.busid = busid
+      }
+    })
   }
   
   createBus(regno, pass, id?) {
@@ -240,6 +253,16 @@ export class DatabaseService {
 
       this.auth.isVisible = false;
     })
+
+    this.drivers.filter( driver => {
+      if(driver.id == id){
+        driver.firstname = firstname;
+
+        driver.lastname = lastname;
+
+        driver.phone = phone
+      }
+    })
   }
 
   updateBus(id, regno, pass, drid) {
@@ -264,6 +287,14 @@ export class DatabaseService {
               horizontalPosition: "end",
               verticalPosition: 'top'
             })
+
+            this.buses.filter( bus => {
+              if(bus.id == id){
+                bus.regno = regno;
+
+                bus.numPassagners = pass
+              }
+            })
       
             this.auth.isVisible = false
           })
@@ -287,7 +318,17 @@ export class DatabaseService {
               horizontalPosition: "end",
               verticalPosition: 'top'
             })
-      
+            
+            this.buses.filter( bus => {
+              if(bus.id == id){
+                bus.regno = regno;
+
+                bus.numPassagners = pass;
+                
+                bus.driverid = drid;
+              }
+            })
+
             this.auth.isVisible = false
           })
         }
@@ -396,7 +437,7 @@ export class DatabaseService {
         let slotdata = dr.payload.doc.data();
 
         let slot = new Slot(id, slotdata["from"], slotdata["to"], slotdata["date"], slotdata["busid"], 
-        slotdata["avail"], slotdata["booked"]);
+        slotdata["avail"], slotdata["booked"], slotdata["delivered"]);
        
         if(!this.searchslot(slot)){
           this.slots.push(slot);

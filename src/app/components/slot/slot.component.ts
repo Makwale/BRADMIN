@@ -17,7 +17,7 @@ import { SloteditComponent } from '../slotedit/slotedit.component';
 })
 export class SlotComponent implements OnInit, DoCheck {
 
-  displayedColumns: string[] = ['checkbox', 'id', 'from', 'to', 'avail', 'booked', 'date', 'action'];
+  displayedColumns: string[] = ['checkbox', 'id', 'from', 'to', 'avail', 'booked', 'date', 'status', 'action'];
   dataSource: MatTableDataSource<Slot>;
   slots: Slot[] = []
   @ViewChild(MatPaginator) paginator: MatPaginator;

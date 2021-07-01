@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { platformBrowser } from '@angular/platform-browser';
+import { Platform } from '@ionic/angular';
 import { AuthService } from './services/auth.service';
 import { DatabaseService } from './services/database.service';
 
@@ -7,8 +9,12 @@ import { DatabaseService } from './services/database.service';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent {
-  constructor(private dbs: DatabaseService, private auth : AuthService ) {
+export class AppComponent implements OnInit {
+  constructor(private dbs: DatabaseService, private auth : AuthService, private ptf: Platform ) {
     dbs.isToolbarVisible
+  }
+
+  ngOnInit(){
+   
   }
 }

@@ -1,11 +1,11 @@
-<mat-form-field style="width: 90%; margin: auto; margin-top: 10px; margin-left: 60px;">
+<mat-form-field style="width: 97%; margin: auto; margin-top: 10px; margin-left: 15px;">
   <mat-label>Search Booking</mat-label>
   <input matInput (keyup)="applyFilter(filter.value)" #filter placeholder="Search booking by id or date" #input>
 </mat-form-field>
 
-<mat-progress-bar *ngIf="isVisible" style="width: 90%; margin: auto;" mode="indeterminate"></mat-progress-bar>
+<mat-progress-bar *ngIf="isVisible" style="width: 97%; margin: auto;" mode="indeterminate"></mat-progress-bar>
 
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 90%; margin: auto;">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 97%; margin: auto;">
 
     <ng-container matColumnDef="checkbox">
       <th mat-header-cell *matHeaderCellDef> 
