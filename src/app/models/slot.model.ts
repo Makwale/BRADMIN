@@ -28,7 +28,7 @@ export class Slot{
             if(delivered){
                 this.status = "Delivered"
             }else{
-                this.status = "--"
+                this.status = ""
             }
         }
     }

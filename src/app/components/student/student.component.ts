@@ -110,42 +110,40 @@ export class StudentComponent implements OnInit {
     const doc = new jsPDF({
       orientation: 'l',
     });
+
+    doc.text("STUDENTS REPORT", 115,20)
+    
     let index = 1;
+
+    doc.cell(10,40,110,10,"Id".toUpperCase(), index, "left")
+    doc.cell(10,40,55,10,"First Name".toUpperCase(), index, "left")
+    doc.cell(10,40,55,10,"Last Name".toUpperCase(), index, "left")
+    doc.cell(10,40,55,10,"Student No".toUpperCase(), index, "left")
+      
+    index++;
 
     if(this.selecedtAll){
 
-      doc.cell(10,10,110,10,"Id".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"First Name".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"Last Name".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"Student No".toUpperCase(), index, "left")
-        
-      index++;
 
       for(let student of this.dataSource.filteredData){
 
-        doc.cell(10,10,110,10,student.id, index, "left")
-        doc.cell(10,10,55,10,student.firstname.toUpperCase(), index, "left")
-        doc.cell(10,10,55,10,student.lastname.toUpperCase(), index, "left")
-        doc.cell(10,10,55,10,student.studentNumber ? String(student.studentNumber) : "N/A", index, "left")
+        doc.cell(10,40,110,10,student.id, index, "left")
+        doc.cell(10,40,55,10,student.firstname.toUpperCase(), index, "left")
+        doc.cell(10,40,55,10,student.lastname.toUpperCase(), index, "left")
+        doc.cell(10,40,55,10,student.studentNumber ? String(student.studentNumber) : "N/A", index, "left")
         
     
         index++;
       }
     }else{
 
-      doc.cell(10,10,110,10,"Id".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"First Name".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"Last Name".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"Student No".toUpperCase(), index, "left")
-        
-      index++;
-
+  
       for(let student of this.students){
 
-        doc.cell(10,10,110,10,student.id, index, "left")
-        doc.cell(10,10,55,10,student.firstname.toUpperCase(), index, "left")
-        doc.cell(10,10,55,10,student.lastname.toUpperCase(), index, "left")
-        doc.cell(10,10,55,10,student.studentNumber ? String(student.studentNumber) : "N/A", index, "left")
+        doc.cell(10,40,110,10,student.id, index, "left")
+        doc.cell(10,40,55,10,student.firstname.toUpperCase(), index, "left")
+        doc.cell(10,40,55,10,student.lastname.toUpperCase(), index, "left")
+        doc.cell(10,40,55,10,student.studentNumber ? String(student.studentNumber) : "N/A", index, "left")
         
     
         index++;

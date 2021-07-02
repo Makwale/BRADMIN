@@ -120,33 +120,31 @@ export class BusComponent implements OnInit {
     const doc = new jsPDF({
       orientation: 'l',
     });
+
+    doc.text("BUSES REPORT", 115,20)
     let index = 1;
 
+    doc.cell(48,40,110,10,"Id".toUpperCase(), index, "left")
+    doc.cell(48,40,80,10,"Registration No".toUpperCase(), index, "left")
+      
+    index++;
+
     if(this.selecedtAll){
-      doc.cell(10,10,110,10,"Id".toUpperCase(), index, "left")
-      doc.cell(10,10,80,10,"Registration No".toUpperCase(), index, "left")
-        
-      index++;
 
       for(let bus of this.dataSource.filteredData){
 
-        doc.cell(10,10,110,10,bus.id, index, "left")
-        doc.cell(10,10,80,10,bus.regno, index, "left")
+        doc.cell(48,40,110,10,bus.id, index, "left")
+        doc.cell(48,40,80,10,bus.regno, index, "left")
         index++;
       }
 
       
     }else{
 
-      doc.cell(10,10,110,10,"Id".toUpperCase(), index, "left")
-      doc.cell(10,10,80,10,"Registration No".toUpperCase(), index, "left")
-        
-      index++;
-
       for(let bus of this.buses){
 
-        doc.cell(10,10,110,10,bus.id, index, "left")
-        doc.cell(10,10,80,10,bus.regno, index, "left")
+        doc.cell(48,40,110,10,bus.id, index, "left")
+        doc.cell(48,40,80,10,bus.regno, index, "left")
         index++;
       }
 

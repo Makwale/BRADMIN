@@ -31,7 +31,8 @@ export class DatabaseService {
       date: datetime,
       busid: busid,
       avail: numPassagners,
-      booked: 0
+      booked: 0,
+      delivered: ""
     }).then(()=> {
   
       this.snackBar.open("Slot is created", "", {

@@ -126,41 +126,39 @@ export class DriverComponent implements OnInit {
     const doc = new jsPDF({
       orientation: 'l',
     });
+
+    doc.text("DRIVERS REPORT", 115,20)
     let index = 1;
 
+    doc.cell(10,40,110,10,"Id".toUpperCase(), index, "left")
+    doc.cell(10,40,55,10,"First Name".toUpperCase(), index, "left")
+    doc.cell(10,40,55,10,"Last Name".toUpperCase(), index, "left")
+    doc.cell(10,40,55,10,"Phone No".toUpperCase(), index, "left")
+
+    index++;
+
     if(this.selecedtAll){
-      doc.cell(10,10,110,10,"Id".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"First Name".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"Last Name".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"Phone No".toUpperCase(), index, "left")
         
-      index++;
 
       for(let driver of this.dataSource.filteredData){
 
-        doc.cell(10,10,110,10,driver.id, index, "left")
-        doc.cell(10,10,55,10,driver.firstname.toUpperCase(), index, "left")
-        doc.cell(10,10,55,10,driver.lastname.toUpperCase(), index, "left")
-        doc.cell(10,10,55,10,`0${driver.phone}`, index, "left")
+        doc.cell(10,40,110,10,driver.id, index, "left")
+        doc.cell(10,40,55,10,driver.firstname.toUpperCase(), index, "left")
+        doc.cell(10,40,55,10,driver.lastname.toUpperCase(), index, "left")
+        doc.cell(10,40,55,10,`0${driver.phone}`, index, "left")
         
     
         index++;
       }
     }else{
 
-      doc.cell(10,10,110,10,"Id".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"First Name".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"Last Name".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"Phone No".toUpperCase(), index, "left")
-        
-      index++;
 
       for(let driver of this.drivers){
 
-        doc.cell(10,10,110,10,driver.id, index, "left")
-        doc.cell(10,10,55,10,driver.firstname.toUpperCase(), index, "left")
-        doc.cell(10,10,55,10,driver.lastname.toUpperCase(), index, "left")
-        doc.cell(10,10,55,10,`0${driver.phone}`, index, "left")
+        doc.cell(10,40,110,10,driver.id, index, "left")
+        doc.cell(10,40,55,10,driver.firstname.toUpperCase(), index, "left")
+        doc.cell(10,40,55,10,driver.lastname.toUpperCase(), index, "left")
+        doc.cell(10,40,55,10,`0${driver.phone}`, index, "left")
         
     
         index++;

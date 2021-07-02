@@ -39,7 +39,8 @@ export class SlotComponent implements OnInit, DoCheck {
   ngAfterViewInit() {
     this.dbs.slots = [];
     setTimeout(()=> {
-      this.dataSource = new MatTableDataSource(this.dbs.slots)
+      let slots = this.dbs.slots.filter( slot => slot.status == "");
+      this.dataSource = new MatTableDataSource(slots)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.isVisible = false;
@@ -63,10 +64,11 @@ export class SlotComponent implements OnInit, DoCheck {
     if(confirm("Are you sure you want to delete this slot?")){
       this.dbs.deletSlot(id)
       
-      this.dbs.slots = this.dbs.slots.filter(slot => slot.id != id)
+      this.dbs.slots = this.dbs.slots.filter(slot => slot.id != id && slot.status == "")
       this.dataSource = new MatTableDataSource(this.dbs.slots)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      
     }
   }
 
@@ -123,23 +125,28 @@ export class SlotComponent implements OnInit, DoCheck {
     const doc = new jsPDF({
       orientation: 'l',
     });
+
+    doc.text("SLOTS REPORT", 115,20)
+
     let index = 1;
+    
+    doc.cell(10,40,80,10,"Id".toUpperCase(), index, "left")
+    doc.cell(10,40,55,10,"From".toUpperCase(), index, "left")
+    doc.cell(10,40,55,10,"To".toUpperCase(), index, "left")
+    doc.cell(10,40,70,10,"Date & time".toUpperCase(), index, "left")
+   
+    index++;
 
     if(this.selecedtAll){
 
-      doc.cell(10,10,80,10,"Id".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"From".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"To".toUpperCase(), index, "left")
-      doc.cell(10,10,70,10,"Date & time".toUpperCase(), index, "left")
         
-      index++;
 
       for(let slot of this.dataSource.filteredData){
 
-        doc.cell(10,10,80,10,slot.id, index, "left")
-        doc.cell(10,10,55,10,slot.from.toUpperCase(), index, "left")
-        doc.cell(10,10,55,10,slot.to.toUpperCase(), index, "left")
-        doc.cell(10,10,70,10,slot.date.toLocaleString(), index, "left")
+        doc.cell(10,40,80,10,slot.id, index, "left")
+        doc.cell(10,40,55,10,slot.from.toUpperCase(), index, "left")
+        doc.cell(10,40,55,10,slot.to.toUpperCase(), index, "left")
+        doc.cell(10,40,70,10,slot.date.toLocaleString(), index, "left")
         
     
         index++;
@@ -147,19 +154,13 @@ export class SlotComponent implements OnInit, DoCheck {
 
     }else{
 
-      doc.cell(10,10,80,10,"Id".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"From".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"To".toUpperCase(), index, "left")
-      doc.cell(10,10,70,10,"Date & time".toUpperCase(), index, "left")
-        
-      index++;
 
       for(let slot of this.slots){
 
-        doc.cell(10,10,80,10,slot.id, index, "left")
-        doc.cell(10,10,55,10,slot.from.toUpperCase(), index, "left")
-        doc.cell(10,10,55,10,slot.to.toUpperCase(), index, "left")
-        doc.cell(10,10,70,10,slot.date.toLocaleString(), index, "left")
+        doc.cell(10,40,80,10,slot.id, index, "left")
+        doc.cell(10,40,55,10,slot.from.toUpperCase(), index, "left")
+        doc.cell(10,40,55,10,slot.to.toUpperCase(), index, "left")
+        doc.cell(10,40,70,10,slot.date.toLocaleString(), index, "left")
         
     
         index++;
@@ -219,5 +220,16 @@ export class SlotComponent implements OnInit, DoCheck {
 
   }
 
+  viewAll(checked){
+    if(checked){
+      this.dataSource = new MatTableDataSource(this.dbs.slots)
+     
+    }else{
+      let slots = this.dbs.slots.filter( slot => slot.status == "");
+      this.dataSource = new MatTableDataSource(slots)
+    }
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
 }

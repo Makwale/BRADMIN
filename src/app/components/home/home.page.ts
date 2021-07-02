@@ -36,24 +36,28 @@ export class HomePage implements AfterViewInit{
     const doc = new jsPDF({
       orientation: 'l',
     });
+
+    
     let index = 1;
     
     if(cat == 'd'){
       name = "Drivers Report.pdf"
 
-      doc.cell(10,10,110,10,"Id".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"First Name".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"Last Name".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"Phone No".toUpperCase(), index, "left")
+      doc.text("DRIVERS REPORT", 115,20)
+      
+      doc.cell(10,40,110,10,"Id".toUpperCase(), index, "left")
+      doc.cell(10,40,55,10,"First Name".toUpperCase(), index, "left")
+      doc.cell(10,40,55,10,"Last Name".toUpperCase(), index, "left")
+      doc.cell(10,40,55,10,"Phone No".toUpperCase(), index, "left")
         
       index++;
 
       for(let driver of this.dbs.drivers){
 
-        doc.cell(10,10,110,10,driver.id, index, "left")
-        doc.cell(10,10,55,10,driver.firstname.toUpperCase(), index, "left")
-        doc.cell(10,10,55,10,driver.lastname.toUpperCase(), index, "left")
-        doc.cell(10,10,55,10,`0${driver.phone}`, index, "left")
+        doc.cell(10,40,110,10,driver.id, index, "left")
+        doc.cell(10,40,55,10,driver.firstname.toUpperCase(), index, "left")
+        doc.cell(10,40,55,10,driver.lastname.toUpperCase(), index, "left")
+        doc.cell(10,40,55,10,`0${driver.phone}`, index, "left")
         
     
         index++;
@@ -67,15 +71,17 @@ export class HomePage implements AfterViewInit{
 
       name = "Buses Report.pdf"
 
-      doc.cell(10,10,110,10,"Id".toUpperCase(), index, "left")
-      doc.cell(10,10,80,10,"Registration No".toUpperCase(), index, "left")
+      doc.text("BUSES REPORT", 115,20)
+
+      doc.cell(48,40,110,10,"Id".toUpperCase(), index, "left")
+      doc.cell(48,40,80,10,"Registration No".toUpperCase(), index, "left")
         
       index++;
 
       for(let bus of this.dbs.buses){
 
-        doc.cell(10,10,110,10,bus.id, index, "left")
-        doc.cell(10,10,80,10,bus.regno, index, "left")
+        doc.cell(48,40,110,10,bus.id, index, "left")
+        doc.cell(48,40,80,10,bus.regno, index, "left")
         index++;
       }
 
@@ -85,20 +91,21 @@ export class HomePage implements AfterViewInit{
 
       name = "Slots Report.pdf"
 
+      doc.text("SLOTS REPORT", 115,20)
 
-      doc.cell(10,10,80,10,"Id".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"From".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"To".toUpperCase(), index, "left")
-      doc.cell(10,10,70,10,"Date & time".toUpperCase(), index, "left")
+      doc.cell(10,40,80,10,"Id".toUpperCase(), index, "left")
+      doc.cell(10,40,55,10,"From".toUpperCase(), index, "left")
+      doc.cell(10,40,55,10,"To".toUpperCase(), index, "left")
+      doc.cell(10,40,70,10,"Date & time".toUpperCase(), index, "left")
         
       index++;
 
       for(let slot of this.dbs.slots){
 
-        doc.cell(10,10,80,10,slot.id, index, "left")
-        doc.cell(10,10,55,10,slot.from.toUpperCase(), index, "left")
-        doc.cell(10,10,55,10,slot.to.toUpperCase(), index, "left")
-        doc.cell(10,10,70,10,slot.date.toLocaleString(), index, "left")
+        doc.cell(10,40,80,10,slot.id, index, "left")
+        doc.cell(10,40,55,10,slot.from.toUpperCase(), index, "left")
+        doc.cell(10,40,55,10,slot.to.toUpperCase(), index, "left")
+        doc.cell(10,40,70,10,slot.date.toLocaleString(), index, "left")
         
     
         index++;
@@ -109,20 +116,21 @@ export class HomePage implements AfterViewInit{
      
       name = "Students Report.pdf"
 
+      doc.text("STUDENTS REPORT", 115,20)
 
-      doc.cell(10,10,110,10,"Id".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"First Name".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"Last Name".toUpperCase(), index, "left")
-      doc.cell(10,10,55,10,"Student No".toUpperCase(), index, "left")
+      doc.cell(10,40,110,10,"Id".toUpperCase(), index, "left")
+      doc.cell(10,40,55,10,"First Name".toUpperCase(), index, "left")
+      doc.cell(10,40,55,10,"Last Name".toUpperCase(), index, "left")
+      doc.cell(10,40,55,10,"Student No".toUpperCase(), index, "left")
         
       index++;
 
       for(let student of this.dbs.students){
 
-        doc.cell(10,10,110,10,student.id, index, "left")
-        doc.cell(10,10,55,10,student.firstname.toUpperCase(), index, "left")
-        doc.cell(10,10,55,10,student.lastname.toUpperCase(), index, "left")
-        doc.cell(10,10,55,10,student.studentNumber ? String(student.studentNumber) : "N/A", index, "left")
+        doc.cell(10,40,110,10,student.id, index, "left")
+        doc.cell(10,40,55,10,student.firstname.toUpperCase(), index, "left")
+        doc.cell(10,40,55,10,student.lastname.toUpperCase(), index, "left")
+        doc.cell(10,40,55,10,student.studentNumber ? String(student.studentNumber) : "N/A", index, "left")
         
     
         index++;
@@ -132,20 +140,21 @@ export class HomePage implements AfterViewInit{
       
       name = "Bookings Report.pdf"
 
+      doc.text("BOOKINGS REPORT", 115,20)
 
-      doc.cell(10,10,80,10,"Id", index, "left")
-      doc.cell(10,10,70,10,"Booking Date & time".toUpperCase(), index, "left")
-      doc.cell(10,10,70,10,"Initial & Last Name".toUpperCase(), index, "left")
-      doc.cell(10,10,50,10,"Student No".toUpperCase(), index, "left")
+      doc.cell(10,40,80,10,"Id", index, "left")
+      doc.cell(10,40,70,10,"Booking Date & time".toUpperCase(), index, "left")
+      doc.cell(10,40,70,10,"Initial & Last Name".toUpperCase(), index, "left")
+      doc.cell(10,40,50,10,"Student No".toUpperCase(), index, "left")
         
       index++;
 
       for(let booking of this.dbs.bookings){
       
-        doc.cell(10,10,80,10,booking.id, index, "left")
-        doc.cell(10,10,70,10,booking.date.toLocaleString(), index, "left")
-        doc.cell(10,10,70,10,`${booking.student.firstname.toUpperCase().substring(0,1)} ${booking.student.lastname.toUpperCase()}`, index, "left")
-        doc.cell(10,10,50,10,String(booking.student.studentNumber), index, "left")
+        doc.cell(10,40,80,10,booking.id, index, "left")
+        doc.cell(10,40,70,10,booking.date.toLocaleString(), index, "left")
+        doc.cell(10,40,70,10,`${booking.student.firstname.toUpperCase().substring(0,1)} ${booking.student.lastname.toUpperCase()}`, index, "left")
+        doc.cell(10,40,50,10,String(booking.student.studentNumber), index, "left")
         
         index++;
       }

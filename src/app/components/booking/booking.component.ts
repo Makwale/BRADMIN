@@ -100,43 +100,38 @@ export class BookingComponent implements OnInit {
     const doc = new jsPDF({
       orientation: 'l',
     });
+
+    doc.text("BOOKINGS REPORT", 115,20)
     let index = 1;
+
+    doc.cell(10,40,80,10,"Id", index, "left")
+    doc.cell(10,40,70,10,"Booking Date & time".toUpperCase(), index, "left")
+    doc.cell(10,40,70,10,"Initial & Last Name".toUpperCase(), index, "left")
+    doc.cell(10,40,50,10,"booking No".toUpperCase(), index, "left")
+      
+    index++;
 
     if(this.selecedtAll){
 
       
-      doc.cell(10,10,80,10,"Id", index, "left")
-      doc.cell(10,10,70,10,"Booking Date & time".toUpperCase(), index, "left")
-      doc.cell(10,10,70,10,"Initial & Last Name".toUpperCase(), index, "left")
-      doc.cell(10,10,50,10,"booking No".toUpperCase(), index, "left")
-        
-      index++;
 
       for(let booking of this.dataSource.filteredData){
       
-        doc.cell(10,10,80,10,booking.id, index, "left")
-        doc.cell(10,10,70,10,booking.date.toLocaleString(), index, "left")
-        doc.cell(10,10,70,10,`${booking.student.firstname.toUpperCase().substring(0,1)} ${booking.student.lastname.toUpperCase()}`, index, "left")
-        doc.cell(10,10,50,10,String(booking.student.studentNumber), index, "left")
+        doc.cell(10,40,80,10,booking.id, index, "left")
+        doc.cell(10,40,70,10,booking.date.toLocaleString(), index, "left")
+        doc.cell(10,40,70,10,`${booking.student.firstname.toUpperCase().substring(0,1)} ${booking.student.lastname.toUpperCase()}`, index, "left")
+        doc.cell(10,40,50,10,String(booking.student.studentNumber), index, "left")
         
         index++;
       }
     }else{
 
-      
-      doc.cell(10,10,80,10,"Id", index, "left")
-      doc.cell(10,10,70,10,"Booking Date & time".toUpperCase(), index, "left")
-      doc.cell(10,10,70,10,"Initial & Last Name".toUpperCase(), index, "left")
-      doc.cell(10,10,50,10,"booking No".toUpperCase(), index, "left")
-        
-      index++;
-
       for(let booking of this.bookings){
       
-        doc.cell(10,10,80,10,booking.id, index, "left")
-        doc.cell(10,10,70,10,booking.date.toLocaleString(), index, "left")
-        doc.cell(10,10,70,10,`${booking.student.firstname.toUpperCase().substring(0,1)} ${booking.student.lastname.toUpperCase()}`, index, "left")
-        doc.cell(10,10,50,10,String(booking.student.studentNumber), index, "left")
+        doc.cell(10,40,80,10,booking.id, index, "left")
+        doc.cell(10,40,70,10,booking.date.toLocaleString(), index, "left")
+        doc.cell(10,40,70,10,`${booking.student.firstname.toUpperCase().substring(0,1)} ${booking.student.lastname.toUpperCase()}`, index, "left")
+        doc.cell(10,40,50,10,String(booking.student.studentNumber), index, "left")
         
         index++;
       }
