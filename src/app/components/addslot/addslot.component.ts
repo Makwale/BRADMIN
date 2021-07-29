@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Bus } from 'src/app/models/bus.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -20,14 +21,14 @@ export class AddslotComponent implements OnInit {
   numPassangers: number;
 
   constructor(private router: Router, private auth: AuthService, private dbs: DatabaseService,
-    private afs: AngularFirestore) { }
+    private afs: AngularFirestore, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getBuss()
     this.signupForm = new FormBuilder().group({
       from: ['', [Validators.required]],
       to: ['', [Validators.required]],
-      datetime: ['', [Validators.required]],
+      datetime: ['', [Validators.required,]],
       busid: ['', [Validators.required]],
  
     })
@@ -50,7 +51,36 @@ export class AddslotComponent implements OnInit {
 
   create(){
 
-    if(this.signupForm.value["from"] == this.signupForm.value["to"]){
+
+
+    if(new Date(this.signupForm.value["datetime"]).toLocaleDateString() < new Date().toLocaleDateString()){
+      this.createSnackBar("Previous date unaccepted")
+    }else if(new Date(this.signupForm.value["datetime"]).toLocaleDateString() == new Date().toLocaleDateString()){
+     
+      if(new Date(this.signupForm.value["datetime"]).toLocaleTimeString() <= new Date().toLocaleTimeString()){
+       this.createSnackBar("Previous time unaccepted")
+      }else{
+        this.createSlot()
+      }
+    }else{
+      this.createSlot()
+    }
+
+   
+    
+  }
+
+  createSnackBar(message: string){
+    this.snackBar.open(message, "", {
+      duration: 5000,
+      horizontalPosition: "end",
+      verticalPosition: 'top'
+    
+    })
+  }
+
+  createSlot(){
+     if(this.signupForm.value["from"] == this.signupForm.value["to"]){
       alert("Source and Destination cannot be the same")
     }else{
 
@@ -58,8 +88,9 @@ export class AddslotComponent implements OnInit {
        new Date(this.signupForm.value["datetime"]), this.signupForm.value["busid"], this.numPassangers)
    
     }
-    
   }
+
+
 
 
   dtEnable(){
