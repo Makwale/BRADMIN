@@ -8,6 +8,8 @@ import { Booking } from '../models/booking.model';
 import { Bus } from '../models/bus.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { AuthService } from './auth.service';
+import { AccountService } from './account.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +23,8 @@ export class DatabaseService {
   buses: Bus[] = [];
   isToolbarVisible = false;
 
-  constructor(private afs: AngularFirestore, private snackBar: MatSnackBar, private auth: AuthService) { }
+  constructor(private afs: AngularFirestore, private snackBar: MatSnackBar,
+     private auth: AuthService, private acs: AccountService, private router: Router) { }
   
   createSlot(from, to, datetime, busid, numPassagners) {
     this.auth.isVisible = true;
@@ -72,6 +75,25 @@ export class DatabaseService {
 
         slot.busid = busid
       }
+    })
+  }
+
+  updateProfile(firstname, lastname, phone) {
+    this.auth.isVisible = true;
+    this.afs.collection("Admin").doc(this.acs.user.id).update({
+      firstname, 
+      lastname,
+      phone
+    }).then( () => {
+      this.auth.isUpdated = true;
+      this.auth.isVisible = false;
+      this.snackBar.open("Profile updated", "", {
+        duration: 3000,
+        horizontalPosition: "end",
+        verticalPosition: 'top'
+      
+      })
+      
     })
   }
   

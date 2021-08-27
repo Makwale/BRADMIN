@@ -47,6 +47,7 @@ import { BuseditComponent } from './components/busedit/busedit.component';
 import { SloteditComponent } from './components/slotedit/slotedit.component';
 import { LoginComponent } from './components/login/login.component';
 import { UnauthComponent } from './components/unauth/unauth.component';
+import { AccountComponent } from './components/account/account.component';
 
 
 const firebaseConfig = {
@@ -75,7 +76,8 @@ const firebaseConfig = {
     BuseditComponent,
     SloteditComponent,
     BookingComponent,
-    LoginComponent],
+    LoginComponent,
+    AccountComponent],
   entryComponents: [ DrivereditComponent],
   imports: [BrowserModule, 
     MatSidenavModule,

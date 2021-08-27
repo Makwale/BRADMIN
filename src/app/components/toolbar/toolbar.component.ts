@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { PopoverController } from '@ionic/angular';
+import { AccountService } from 'src/app/services/account.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DatabaseService } from 'src/app/services/database.service';
+import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
   selector: 'app-toolbar',
@@ -12,17 +15,18 @@ import { DatabaseService } from 'src/app/services/database.service';
 export class ToolbarComponent implements OnInit {
 
   constructor(private afa: AngularFireAuth, private router: Router, private auth: AuthService,
-    private dbs: DatabaseService) { }
+    private dbs: DatabaseService, public popoverController: PopoverController, private acs: AccountService) { }
 
   ngOnInit() {}
 
-  logout(){
-   
-    this.afa.signOut().then( res => {
-      this.auth.isAuthorised = false;
-      this.dbs.isToolbarVisible = false;
-      
-      this.router.navigateByUrl("login")
-    })
+  async profile(event){
+    const popover = await this.popoverController.create({
+      component: ProfileComponent,
+      cssClass: 'my-custom-class',
+      translucent: true,
+      event: event
+    });
+    await popover.present();
+
   }
 }

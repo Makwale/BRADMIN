@@ -1,9 +1,13 @@
-<mat-toolbar  style="height: 80px; background-color: #0a4694;">
+<mat-toolbar  style="height: 80px; background-color: #031b36">
 
-  <span style="color: #fff;">BUSRIDE ADMIN</span>
+  <span style="color: #fff;">Bus Ride Admin</span>
   <span class="example-spacer"></span>
-  <button (click)="logout()"  mat-raised-button  style="color: #0a4694;" >
-    Logout
-  </button>
+  <ion-button color="light" *ngIf="acs.loginStatus"(click)="profile($event)">
+    <ion-avatar  style="height: 25px; width: 25px;">
+      <img src="..//..//..//assets/profile.png">
+    </ion-avatar>
+    <ion-icon color="ourtheme" name="chevron-down"></ion-icon>
+  </ion-button>
+ 
   
 </mat-toolbar>

@@ -17,6 +17,7 @@ export class AuthService {
   
   isAuthorised: boolean = false;
   isVisible = false;
+  isUpdated = false;
   constructor(private afa: AngularFireAuth, private afs: AngularFirestore,
     private acs: AccountService, private router: Router,
     private snackBar: MatSnackBar) { }
@@ -63,15 +64,19 @@ export class AuthService {
     this.isVisible = true
     this.afa.signInWithEmailAndPassword(email, password).then(res => {
      
-      this.afs.collection("Admin").snapshotChanges().subscribe(data => {
-        if(data[0].payload.doc.id == res.user.uid){
+      this.afs.collection("Admin").doc(res.user.uid).snapshotChanges().subscribe(data => {
+
+        if(data.payload.data()){
           this.isAuthorised = true
           this.isVisible = false
-          this.router.navigateByUrl("home")
-          
+          !this.isUpdated ? this.router.navigateByUrl("home") : this.router.navigateByUrl("home/account")
+          this.acs.user = data.payload.data()
+          this.acs.user.id = res.user.uid;
+
         }else{
           this.isVisible = false
-          this.router.navigateByUrl("home")
+          !this.isUpdated ? this.router.navigateByUrl("home") : this.router.navigateByUrl("home/account")
+
         }
       })
     }).catch(error => {

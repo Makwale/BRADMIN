@@ -13,7 +13,7 @@
           <mat-checkbox color="primary" [checked]="selecedtAll" [indeterminate]="isIndeterminate" (change)="checkAll($event.checked)" ></mat-checkbox>
 
           <button (click)="generateReport()" *ngIf="drivers.length > 0" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-            <mat-icon style="color: #0a4694;">download</mat-icon>
+            <mat-icon style="color: #031b36">download</mat-icon>
         </button> 
 
         <button *ngIf="drivers.length > 0" (click)="deleteSelected()"  mat-icon-button aria-label="Example icon button with a vertical three dot icon">

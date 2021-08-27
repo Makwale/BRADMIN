@@ -13,6 +13,8 @@ import { StudentComponent } from './components/student/student.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { UnauthComponent } from './components/unauth/unauth.component';
+import { AccountComponent } from './components/account/account.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -78,12 +80,16 @@ const routes: Routes = [
         path: 'booking',
         component: BookingComponent
       },
+      {
+        path: 'account',
+        component: AccountComponent
+      }
     ]
   },
-  
-
-
-
+  {
+    path: "profile",
+    component: ProfileComponent
+  }
  
 ];
 
