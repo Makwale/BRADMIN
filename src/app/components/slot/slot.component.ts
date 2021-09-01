@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import jsPDF from 'jspdf';
 import { Slot } from 'src/app/models/slot.model';
 import { DatabaseService } from 'src/app/services/database.service';
+import { SlotbookingPage } from '../slotbooking/slotbooking.page';
 import { SloteditComponent } from '../slotedit/slotedit.component';
 
 @Component({
@@ -39,7 +40,7 @@ export class SlotComponent implements OnInit, DoCheck {
   ngAfterViewInit() {
     this.dbs.slots = [];
     setTimeout(()=> {
-      let slots = this.dbs.slots.filter( slot => slot.status == "");
+      let slots = this.dbs.slots.filter( slot => slot.date >= new Date());
       this.dataSource = new MatTableDataSource(slots)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -64,7 +65,7 @@ export class SlotComponent implements OnInit, DoCheck {
     if(confirm("Are you sure you want to delete this slot?")){
       this.dbs.deletSlot(id)
       
-      this.dbs.slots = this.dbs.slots.filter(slot => slot.id != id && slot.status == "")
+      this.dbs.slots = this.dbs.slots.filter(slot => slot.id != id && slot.date >= new Date())
       this.dataSource = new MatTableDataSource(this.dbs.slots)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -225,11 +226,19 @@ export class SlotComponent implements OnInit, DoCheck {
       this.dataSource = new MatTableDataSource(this.dbs.slots)
      
     }else{
-      let slots = this.dbs.slots.filter( slot => slot.status == "");
+      let slots = this.dbs.slots.filter( slot => slot.date >= new Date());
       this.dataSource = new MatTableDataSource(slots)
     }
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  bookingSlot(slot: Slot){
+    const dialogRef = this.dialog.open(SlotbookingPage, {
+      height : "750px",
+      width: "1500px",
+      data: slot
+    });
   }
 
 }
