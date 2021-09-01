@@ -37,12 +37,12 @@ export class SlotbookingPage implements OnInit {
   }
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.dbs.bookings.filter(booking => booking.slotid == this.slot.id))
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+   
   }
 
   ngAfterViewInit() {
+
+    this.dataSource = new MatTableDataSource(this.dbs.bookings.filter(booking => booking.slotid == this.slot.id))
 
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

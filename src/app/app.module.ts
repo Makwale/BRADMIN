@@ -48,6 +48,7 @@ import { SloteditComponent } from './components/slotedit/slotedit.component';
 import { LoginComponent } from './components/login/login.component';
 import { UnauthComponent } from './components/unauth/unauth.component';
 import { AccountComponent } from './components/account/account.component';
+import { SlotbookingPageModule } from './slotbooking/slotbooking.module';
 
 
 const firebaseConfig = {
@@ -96,6 +97,7 @@ const firebaseConfig = {
     MatProgressBarModule,
     MatSnackBarModule,
     MatCheckboxModule,
+    SlotbookingPageModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,

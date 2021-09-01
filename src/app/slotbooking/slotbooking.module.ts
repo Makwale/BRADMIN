@@ -19,19 +19,24 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    MatSidenavModule,
+    MatToolbarModule,
     MatButtonModule,
     MatIconModule,
     MatExpansionModule,
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
-    MatPaginatorModule, 
+    MatPaginatorModule,
+    FormsModule, 
     MatSortModule,
     ReactiveFormsModule,
     MatDialogModule,
