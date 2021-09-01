@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import jsPDF from 'jspdf';
 import { Slot } from 'src/app/models/slot.model';
 import { DatabaseService } from 'src/app/services/database.service';
-import { SlotbookingPage } from '../slotbooking/slotbooking.page';
+import { SlotbookingPage } from '../../slotbooking/slotbooking.page';
 import { SloteditComponent } from '../slotedit/slotedit.component';
 
 @Component({

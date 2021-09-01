@@ -32,7 +32,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomePage,
-    canActivate: [],
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -92,7 +92,7 @@ const routes: Routes = [
   },
   {
     path: 'slotbooking',
-    loadChildren: () => import('./components/slotbooking/slotbooking.module').then( m => m.SlotbookingPageModule)
+    loadChildren: () => import('./slotbooking/slotbooking.module').then( m => m.SlotbookingPageModule)
   }
  
 ];
