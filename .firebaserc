@@ -9,6 +9,6 @@
     }
   },
   "projects": {
-    "default": "bus-project-52efc"
+    "prod": "bus-project-52efc"
   }
 }
