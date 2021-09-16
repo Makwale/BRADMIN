@@ -1,0 +1,19 @@
+name: stagingtwo
+'on':
+  pull_request:
+     branches:
+      - master
+  push:
+    branches:
+      - master
+jobs:
+  firebase-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          args: deploy --only hosting:bus-project-52efc
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
