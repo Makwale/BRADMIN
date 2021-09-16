@@ -24,6 +24,7 @@ jobs:
 
     # Runs a single command using the runners shell
     - run: npm ci && npm run build
+      working-directory: ${{env.working-dirictory}}
     - name: Firebase install
       run: npm install -g firebase-tools
     - name: Firebase deploy
