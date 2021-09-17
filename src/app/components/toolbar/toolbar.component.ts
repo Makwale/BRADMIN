@@ -14,8 +14,8 @@ import { ProfileComponent } from '../profile/profile.component';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor(private afa: AngularFireAuth, private router: Router, private auth: AuthService,
-    private dbs: DatabaseService, public popoverController: PopoverController, private acs: AccountService) { }
+  constructor(private afa: AngularFireAuth, private router: Router, public auth: AuthService,
+    private dbs: DatabaseService, public popoverController: PopoverController, public acs: AccountService) { }
 
   ngOnInit() {}
 
