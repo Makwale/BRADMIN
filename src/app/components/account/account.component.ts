@@ -21,7 +21,7 @@ export class AccountComponent implements OnInit {
   passenabled = false;
   hasCode = false;
   disable;
-  constructor(private router: Router, private auth: AuthService, 
+  constructor(private router: Router, public auth: AuthService, 
     private snackBar: MatSnackBar, private acs: AccountService, private dbs: DatabaseService) { }
 
   ngOnInit() {

@@ -20,7 +20,7 @@ export class AdddriverComponent implements OnInit {
   passenabled = false;
   hasCode = false;
 
-  constructor(private router: Router, private auth: AuthService, private snackBar: MatSnackBar) { }
+  constructor(private router: Router, public auth: AuthService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.signupForm = new FormBuilder().group({

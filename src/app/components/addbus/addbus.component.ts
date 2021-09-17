@@ -19,7 +19,7 @@ export class AddbusComponent implements OnInit {
   drivers: Driver[] = [];
   driverid;
 
-  constructor(private router: Router, private auth: AuthService, 
+  constructor(private router: Router, public auth: AuthService, 
     private dbs: DatabaseService, private afs: AngularFirestore) { }
 
   ngOnInit() {

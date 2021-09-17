@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   passenabled = false;
  
 
-  constructor(private router: Router, private auth: AuthService, private ptf: Platform) {
+  constructor(private router: Router, public auth: AuthService, public ptf: Platform) {
     
    }
 

@@ -11,7 +11,7 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class HomePage implements AfterViewInit{
 
-  constructor(private dbs: DatabaseService) {}
+  constructor(public dbs: DatabaseService) {}
 
   ngOnInit(){
 

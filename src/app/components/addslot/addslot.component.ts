@@ -20,7 +20,7 @@ export class AddslotComponent implements OnInit {
   dtenabled = false;
   numPassangers: number;
 
-  constructor(private router: Router, private auth: AuthService, private dbs: DatabaseService,
+  constructor(private router: Router, public auth: AuthService, private dbs: DatabaseService,
     private afs: AngularFirestore, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
