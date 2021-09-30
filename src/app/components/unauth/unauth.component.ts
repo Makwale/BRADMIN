@@ -8,7 +8,7 @@ import { Platform } from '@ionic/angular';
 })
 export class UnauthComponent implements OnInit {
 
-  constructor(public ptf: Platform) { }
+  constructor(private ptf: Platform) { }
 
   ngOnInit() {}
 
