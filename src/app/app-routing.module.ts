@@ -25,7 +25,10 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
-  
+  {
+    path: "unauth",
+    component: UnauthComponent,
+  },
   {
     path: 'home',
     component: HomePage,
