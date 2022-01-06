@@ -8,7 +8,6 @@ import { BookingComponent } from './components/booking/booking.component';
 import { BusComponent } from './components/bus/bus.component';
 import { HomePage } from './components/home/home.page';
 import { DriverComponent } from './components/driver/driver.component';
-import { SlotComponent } from './components/slot/slot.component';
 import { StudentComponent } from './components/student/student.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -19,14 +18,15 @@ import { ProfileComponent } from './components/profile/profile.component';
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent,
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
   {
     path: 'login',
     component: LoginComponent,
   },
   {
-    path: "unauth",
+    path: 'unauth',
     component: UnauthComponent,
   },
   {
@@ -57,11 +57,6 @@ const routes: Routes = [
       },
 
       {
-        path: 'slot',
-        component: SlotComponent
-      },
-
-      {
         path: 'addslot',
         component: AddslotComponent
       },
@@ -87,14 +82,13 @@ const routes: Routes = [
     ]
   },
   {
-    path: "profile",
+    path: 'profile',
     component: ProfileComponent
   },
   {
     path: 'slotbooking',
-    loadChildren: () => import('./slotbooking/slotbooking.module').then( m => m.SlotbookingPageModule)
+    loadChildren: () => import('./slotbooking/slotbooking.module').then(m => m.SlotbookingPageModule)
   }
- 
 ];
 
 @NgModule({

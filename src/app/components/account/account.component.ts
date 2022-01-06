@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AccountService } from 'src/app/services/account.service';
 import { DatabaseService } from 'src/app/services/database.service';
 
@@ -21,7 +21,7 @@ export class AccountComponent implements OnInit {
   passenabled = false;
   hasCode = false;
   disable;
-  constructor(private router: Router, public auth: AuthService, 
+  constructor(private router: Router, public auth: AuthService,
     private snackBar: MatSnackBar, private acs: AccountService, private dbs: DatabaseService) { }
 
   ngOnInit() {
@@ -29,56 +29,56 @@ export class AccountComponent implements OnInit {
       firstname: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z ]*')]],
       lastname: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z ]*')]],
       email: [''],
-      phone:  ['', [Validators.required, Validators.minLength(9),Validators.maxLength(9), Validators.pattern("^[0-9]{9}$")]],
-    })
+      phone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9), Validators.pattern('^[0-9]{9}$')]],
+    });
 
-    this.signupForm.controls["firstname"].setValue(this.acs.user.firstname)
-    this.signupForm.controls["lastname"].setValue(this.acs.user.lastname)
-    this.signupForm.controls["phone"].setValue(this.acs.user.phone)
-    this.signupForm.controls["email"].setValue(this.acs.user.email)
+    this.signupForm.controls.firstname.setValue(this.acs.user.firstname);
+    this.signupForm.controls.lastname.setValue(this.acs.user.lastname);
+    this.signupForm.controls.phone.setValue(this.acs.user.phone);
+    this.signupForm.controls.email.setValue(this.acs.user.email);
   }
 
-  get firstname() { return this.signupForm.get('firstname')}
+  get firstname() { return this.signupForm.get('firstname'); }
 
-  get lastname() { return this.signupForm.get('lastname')}
+  get lastname() { return this.signupForm.get('lastname'); }
 
-  get email() { return this.signupForm.get('email')}
+  get email() { return this.signupForm.get('email'); }
 
-  get phone() { return this.signupForm.get('phone')}
+  get phone() { return this.signupForm.get('phone'); }
 
 
-  update(){
-      this.dbs.updateProfile(this.signupForm.value["firstname"], this.signupForm.value["lastname"],
-      this.signupForm.value["phone"])
-    
+  update() {
+    this.dbs.updateProfile(this.signupForm.value.firstname, this.signupForm.value.lastname,
+      this.signupForm.value.phone);
+
   }
 
-  fnameEnable(){
+  fnameEnable() {
     this.fenabled = true;
   }
 
-  lnameEnable(){
+  lnameEnable() {
     this.lenabled = true;
   }
 
-  phoneEnable(){
+  phoneEnable() {
     this.penabled = true;
-    
+
   }
 
-  emailEnable(){
+  emailEnable() {
     this.emenabled = true;
   }
 
-  passEnable(){
+  passEnable() {
     this.passenabled = true;
   }
 
-  keydown(){
-    
-    if(String(this.signupForm.value["phone"]).length == 3)
-    
-      this.hasCode = String(this.signupForm.value["phone"]).substring(0,3) == "+27" ? true : false 
+  keydown() {
+
+    if (String(this.signupForm.value.phone).length === 3) {
+      this.hasCode = String(this.signupForm.value.phone).substring(0, 3) === '+27' ? true : false;
+    };
 
   }
 

@@ -14,26 +14,24 @@ export class LoginComponent implements OnInit {
   signupForm: FormGroup;
   emenabled = false;
   passenabled = false;
- 
+
 
   constructor(private router: Router, public auth: AuthService, public ptf: Platform) {
-    
-   }
+
+  }
 
   ngOnInit() {
     this.signupForm = new FormBuilder().group({
       email: [''],
       password: [''],
-    })
+    });
 
   }
 
 
-  signin(){
+  signin() {
 
-      this.auth.signin(this.signupForm.value["email"], this.signupForm.value["password"])
-   
-    
+    this.auth.signin(this.signupForm.value.email, this.signupForm.value.password);
   }
 
 

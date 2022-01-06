@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import  firebase from 'firebase/app';
+import firebase from 'firebase/app';
 
-import { AngularFirestore, 
+import {
+  AngularFirestore,
   AngularFirestoreCollection,
-   AngularFirestoreDocument } from '@angular/fire/firestore';
+  AngularFirestoreDocument
+} from '@angular/fire/firestore';
 import { AccountService } from './account.service';
 import { Router } from '@angular/router';
 import { DatabaseService } from './database.service';
@@ -14,8 +16,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root'
 })
 export class AuthService {
-  
-  isAuthorised: boolean = false;
+
+  isAuthorised = false;
   isVisible = false;
   isUpdated = false;
   constructor(private afa: AngularFireAuth, private afs: AngularFirestore,
@@ -23,69 +25,76 @@ export class AuthService {
     private snackBar: MatSnackBar) { }
 
   createDriver(name: string, surname: string, phone: number, email: string, password: string) {
-    this.isVisible = true
-    this.afa.createUserWithEmailAndPassword( email, password).then( userCredentials => {
-      let id = userCredentials.user.uid;
-      this.afs.collection("Driver").doc(id).set({
+    this.isVisible = true;
+    this.afa.createUserWithEmailAndPassword(email, password).then(userCredentials => {
+      const id = userCredentials.user.uid;
+      this.afs.collection('driver').doc(id).set({
         firstname: name,
         lastname: surname,
-        phone: phone,
-        email: email,
-      }).then( res => {
+        phone,
+        email,
+      }).then(res => {
 
-        this.snackBar.open("Driver profile is created", "", {
+        this.snackBar.open('Driver profile is created', '', {
           duration: 3000,
-          horizontalPosition: "end",
+          horizontalPosition: 'end',
           verticalPosition: 'top'
-        })
+        });
 
         this.isVisible = false;
-        
-      }).catch( error => {
-        
-        this.snackBar.open(error.message, "", {
-          duration: 3000,
-          horizontalPosition: "end",
-          verticalPosition: 'top'
-        })
-        this.isVisible = false
-      })
 
-    }).catch( error => {
-      this.snackBar.open(error.message, "", {
+      }).catch(error => {
+
+        this.snackBar.open(error.message, '', {
+          duration: 3000,
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
+        this.isVisible = false;
+      });
+
+    }).catch(error => {
+      this.snackBar.open(error.message, '', {
         duration: 3000,
-        horizontalPosition: "end",
+        horizontalPosition: 'end',
         verticalPosition: 'top'
-      })
-      this.isVisible = false
-    })
+      });
+      this.isVisible = false;
+    });
   }
   signin(email, password) {
-    this.isVisible = true
+    this.isVisible = true;
     this.afa.signInWithEmailAndPassword(email, password).then(res => {
-     
-      this.afs.collection("Admin").doc(res.user.uid).snapshotChanges().subscribe(data => {
 
-        if(data.payload.data()){
-          this.isAuthorised = true
-          this.isVisible = false
-          !this.isUpdated ? this.router.navigateByUrl("home") : this.router.navigateByUrl("home/account")
-          this.acs.user = data.payload.data()
+      this.afs.collection('admin').doc(res.user.uid).snapshotChanges().subscribe(data => {
+
+        if (data.payload.data()) {
+          this.isAuthorised = true;
+          this.isVisible = false;
+          if (!this.isUpdated) {
+            this.router.navigateByUrl('home');
+          } else {
+            this.router.navigateByUrl('home/account');
+          }
+          this.acs.user = data.payload.data();
           this.acs.user.id = res.user.uid;
 
-        }else{
-          this.isVisible = false
-          !this.isUpdated ? this.router.navigateByUrl("home") : this.router.navigateByUrl("home/account")
-
+        } else {
+          this.isVisible = false;
+          if (!this.isUpdated) {
+            this.router.navigateByUrl('home');
+          } else {
+            this.router.navigateByUrl('home/account');
+          }
         }
-      })
+      });
     }).catch(error => {
-      this.snackBar.open(error.message, "", {
+      this.snackBar.open(error.message, '', {
         duration: 3000,
-        horizontalPosition: "end",
+        horizontalPosition: 'end',
         verticalPosition: 'top'
-      })
+      });
       this.isVisible = false;
-    })
+    });
   }
 }

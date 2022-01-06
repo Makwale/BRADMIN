@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -27,74 +27,75 @@ export class AdddriverComponent implements OnInit {
       firstname: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z ]*')]],
       lastname: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z ]*')]],
       email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
-      phone:  ['', [Validators.required, Validators.minLength(9),Validators.maxLength(9), Validators.pattern("^[0-9]{9}$")]],
-      password: ['', [Validators.minLength(8),Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{7,}')]],
+      phone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9), Validators.pattern('^[0-9]{9}$')]],
+      password: ['', [Validators.minLength(8), Validators.required,
+      Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{7,}')]],
       cpassword: [''],
-    })
+    });
 
   }
 
-  get firstname() { return this.signupForm.get('firstname')}
+  get firstname() { return this.signupForm.get('firstname'); }
 
-  get lastname() { return this.signupForm.get('lastname')}
+  get lastname() { return this.signupForm.get('lastname'); }
 
-  get email() { return this.signupForm.get('email')}
+  get email() { return this.signupForm.get('email'); }
 
-  get phone() { return this.signupForm.get('phone')}
+  get phone() { return this.signupForm.get('phone'); }
 
-  get password() { return this.signupForm.get('password')}
+  get password() { return this.signupForm.get('password'); }
 
-  get cpassword() { return this.signupForm.get('cpassword')}
+  get cpassword() { return this.signupForm.get('cpassword'); }
 
 
-  navigate(){
-    this.router.navigateByUrl("menu/signin")
+  navigate() {
+    this.router.navigateByUrl('menu/signin');
   }
 
-  create(){
+  create() {
 
-    if(this.signupForm.value["password"] == this.signupForm.value["cpassword"]){
-      this.auth.createDriver(this.signupForm.value["firstname"], this.signupForm.value["lastname"],
-      this.signupForm.value["phone"], this.signupForm.value["email"], this.signupForm.value["password"])
-    }else{
-   
-      
-      this.snackBar.open("Passwords do not match", "", {
+    if (this.signupForm.value.password === this.signupForm.value.cpassword) {
+      this.auth.createDriver(this.signupForm.value.firstname, this.signupForm.value.lastname,
+        this.signupForm.value.phone, this.signupForm.value.email, this.signupForm.value.password);
+    } else {
+
+
+      this.snackBar.open('Passwords do not match', '', {
         duration: 3000,
-        horizontalPosition: "end",
+        horizontalPosition: 'end',
         verticalPosition: 'top'
-      })
+      });
     }
-    
+
   }
 
-  fnameEnable(){
+  fnameEnable() {
     this.fenabled = true;
   }
 
-  lnameEnable(){
+  lnameEnable() {
     this.lenabled = true;
   }
 
-  phoneEnable(){
+  phoneEnable() {
     this.penabled = true;
-    
+
   }
 
-  emailEnable(){
+  emailEnable() {
     this.emenabled = true;
   }
 
-  passEnable(){
+  passEnable() {
     this.passenabled = true;
   }
 
-  keydown(){
-    console.log(String(this.signupForm.value["phone"]).length)
-    if(String(this.signupForm.value["phone"]).length == 3)
-    
-      this.hasCode = String(this.signupForm.value["phone"]).substring(0,3) == "+27" ? true : false 
-      console.log(this.hasCode)
+  keydown() {
+    console.log(String(this.signupForm.value.phone).length);
+    if (String(this.signupForm.value.phone).length === 3) {
+      this.hasCode = String(this.signupForm.value.phone).substring(0, 3) === '+27' ? true : false;
+    };
+    console.log(this.hasCode);
 
   }
 

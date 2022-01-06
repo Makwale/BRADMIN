@@ -10,11 +10,11 @@ import { DatabaseService } from './services/database.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(public dbs: DatabaseService, private auth : AuthService, private ptf: Platform ) {
-    dbs.isToolbarVisible
+  constructor(public dbs: DatabaseService, private auth: AuthService, private ptf: Platform) {
+
   }
 
-  ngOnInit(){
-   
+  ngOnInit() {
+
   }
 }

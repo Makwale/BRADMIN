@@ -8,7 +8,7 @@ import { DatabaseService } from 'src/app/services/database.service';
   selector: 'app-driveredit',
   templateUrl: './driveredit.component.html',
   styleUrls: ['./driveredit.component.scss'],
-  providers: [ MatDialog]
+  providers: [MatDialog]
 })
 export class DrivereditComponent implements OnInit {
 
@@ -19,57 +19,55 @@ export class DrivereditComponent implements OnInit {
   emenabled = false;
   passenabled = false;
   hasCode = false;
-  
+
   constructor(private df: MatDialogRef<Driver>, private dbs: DatabaseService, @Inject(MAT_DIALOG_DATA) public driver: Driver) { }
 
   ngOnInit() {
-
-   
     this.signupForm = new FormBuilder().group({
       firstname: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z ]*')]],
       lastname: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z ]*')]],
-      phone:  ['', [Validators.required, Validators.minLength(9),Validators.maxLength(9), Validators.pattern("^[0-9]{9}$")]],
-     
-    })
+      phone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9), Validators.pattern('^[0-9]{9}$')]],
 
-    this.signupForm.controls["firstname"].setValue(this.driver.firstname)
-    this.signupForm.controls["lastname"].setValue(this.driver.lastname)
-    this.signupForm.controls["phone"].setValue(this.driver.phone)
+    });
+
+    this.signupForm.controls.firstname.setValue(this.driver.firstname);
+    this.signupForm.controls.lastname.setValue(this.driver.lastname);
+    this.signupForm.controls.phone.setValue(this.driver.phone);
   }
 
-  get firstname() { return this.signupForm.get('firstname')}
+  get firstname() { return this.signupForm.get('firstname'); }
 
-  get lastname() { return this.signupForm.get('lastname')}
+  get lastname() { return this.signupForm.get('lastname'); }
 
-  get phone() { return this.signupForm.get('phone')}
+  get phone() { return this.signupForm.get('phone'); }
 
 
-  save(){
+  save() {
 
-      this.dbs.updateDriver(this.driver.id,this.signupForm.value["firstname"], this.signupForm.value["lastname"],
-      this.signupForm.value["phone"])
-    
-    
+    this.dbs.updateDriver(this.driver.id, this.signupForm.value.firstname, this.signupForm.value.lastname,
+      this.signupForm.value.phone);
+
+
   }
 
-  fnameEnable(){
+  fnameEnable() {
     this.fenabled = true;
   }
 
-  lnameEnable(){
+  lnameEnable() {
     this.lenabled = true;
   }
 
-  phoneEnable(){
+  phoneEnable() {
     this.penabled = true;
-    
+
   }
 
-  emailEnable(){
+  emailEnable() {
     this.emenabled = true;
   }
 
-  passEnable(){
+  passEnable() {
     this.passenabled = true;
   }
 
