@@ -32,18 +32,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HomePage } from './components/home/home.page';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { DriverComponent } from './components/driver/driver.component';
-import { BusComponent } from './components/bus/bus.component';
+import { AmbulanceComponent } from './components/ambulance/ambulance.component';
 import { AdddriverComponent } from './components/adddriver/adddriver.component';
-import { AddbusComponent } from './components/addbus/addbus.component';
-import { AddslotComponent } from './components/addslot/addslot.component';
+import { AddAmbulanceComponent } from './components/addambulance/addambulance.component';
 import { StudentComponent } from './components/student/student.component';
 import { AddstudentComponent } from './components/addstudent/addstudent.component';
 import { BookingComponent } from './components/booking/booking.component';
 
 import { MatDialog } from '@angular/material/dialog';
 import { DrivereditComponent } from './components/driveredit/driveredit.component';
-import { BuseditComponent } from './components/busedit/busedit.component';
-import { SloteditComponent } from './components/slotedit/slotedit.component';
+import { AmbulanceEditComponent } from './components/ambulanceedit/ambulanceedit.component';
 import { LoginComponent } from './components/login/login.component';
 import { UnauthComponent } from './components/unauth/unauth.component';
 import { AccountComponent } from './components/account/account.component';
@@ -63,15 +61,13 @@ const firebaseConfig = {
     HomePage,
     ToolbarComponent,
     DriverComponent,
-    BusComponent,
+    AmbulanceComponent,
     AdddriverComponent,
-    AddbusComponent,
-    AddslotComponent,
+    AddAmbulanceComponent,
     StudentComponent,
     AddstudentComponent,
     DrivereditComponent,
-    BuseditComponent,
-    SloteditComponent,
+    AmbulanceEditComponent,
     BookingComponent,
     LoginComponent,
     AccountComponent],

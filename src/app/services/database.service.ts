@@ -5,7 +5,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Student } from '../models/student.model';
 import { Slot } from '../models/slot.model';
 import { Booking } from '../models/booking.model';
-import { Bus } from '../models/bus.model';
+import { Ambulance } from '../models/ambulance.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from './auth.service';
 import { AccountService } from './account.service';
@@ -20,19 +20,19 @@ export class DatabaseService {
   students: Student[] = [];
   slots: Slot[] = [];
   bookings: Booking[] = [];
-  buses: Bus[] = [];
+  ambulances: Ambulance[] = [];
   isToolbarVisible = false;
 
   constructor(private afs: AngularFirestore, private snackBar: MatSnackBar,
     private auth: AuthService, private acs: AccountService, private router: Router) { }
 
-  createSlot(from, to, datetime, busid, numPassagners) {
+  createSlot(from, to, datetime, ambulanceid, numPassagners) {
     this.auth.isVisible = true;
     this.afs.collection('Slot').add({
       from,
       to,
       date: datetime,
-      busid,
+      ambulanceid,
       avail: numPassagners,
       booked: 0,
       delivered: ''
@@ -44,37 +44,6 @@ export class DatabaseService {
         verticalPosition: 'top'
       });
       this.auth.isVisible = false;
-    });
-  }
-
-  updateSlot(id, from, to, date: Date, busid) {
-    this.auth.isVisible = true;
-
-    this.afs.collection('Slot').doc(id).update({
-      from,
-      to,
-      date,
-      busid
-    }).then(() => {
-      this.snackBar.open('Slot is updated', '', {
-        duration: 3000,
-        horizontalPosition: 'end',
-        verticalPosition: 'top'
-      });
-      this.auth.isVisible = false;
-    });
-
-    this.slots.filter(slot => {
-      if (slot.id === id) {
-
-        slot.from = from;
-
-        slot.to = to;
-
-        slot.date = date;
-
-        slot.busid = busid;
-      }
     });
   }
 
@@ -97,11 +66,11 @@ export class DatabaseService {
     });
   }
 
-  createBus(regno, pass, id?) {
+  createAmbulance(regno, id?) {
     this.auth.isVisible = true;
-
-    if (this.searchBusByReg(regno)) {
-      this.snackBar.open(`Bus with registration number ${regno} is already added`, '', {
+    console.log(regno);
+    if (this.searchambulanceByReg(regno)) {
+      this.snackBar.open(`Ambulance with registration number ${regno} is already added`, '', {
         duration: 5000,
         horizontalPosition: 'end',
         verticalPosition: 'top'
@@ -112,7 +81,7 @@ export class DatabaseService {
     } else {
       if (id !== '' && id !== undefined) {
         if (this.searchAssignedDrivers(id)) {
-          this.snackBar.open('Bus driver cannot be assigned to more than 1 bus', '', {
+          this.snackBar.open('Ambulance driver cannot be assigned to more than 1 ambulance', '', {
             duration: 5000,
             horizontalPosition: 'end',
             verticalPosition: 'top'
@@ -121,12 +90,12 @@ export class DatabaseService {
 
           this.auth.isVisible = false;
         } else {
-          this.afs.collection('Bus').add({
+          this.afs.collection('ambulance').add({
             regno,
-            numPassangers: pass,
-            driverid: id
+            driverId: id,
+            status: 'available'
           }).then(() => {
-            this.snackBar.open('Bus is added', '', {
+            this.snackBar.open('ambulance is added', '', {
               duration: 3000,
               horizontalPosition: 'end',
               verticalPosition: 'top'
@@ -136,12 +105,12 @@ export class DatabaseService {
         }
       } else {
 
-        this.afs.collection('Bus').add({
+        this.afs.collection('ambulance').add({
           regno,
-          numPassangers: pass,
-          driverid: ''
+          driverId: '',
+          status: 'available'
         }).then(() => {
-          this.snackBar.open('Bus is added', '', {
+          this.snackBar.open('Ambulance is added', '', {
             duration: 3000,
             horizontalPosition: 'end',
             verticalPosition: 'top'
@@ -156,9 +125,9 @@ export class DatabaseService {
 
   }
 
-  searchBusByReg(regno) {
-    for (const bus of this.buses) {
-      if (bus.regno === regno) {
+  searchambulanceByReg(regno) {
+    for (const ambulance of this.ambulances) {
+      if (ambulance.regno === regno) {
         return true;
       }
     }
@@ -166,8 +135,8 @@ export class DatabaseService {
   }
 
   searchAssignedDrivers(id) {
-    for (const bus of this.buses) {
-      if (bus.driverid === id) {
+    for (const ambulance of this.ambulances) {
+      if (ambulance.driverId === id) {
         return true;
       }
     }
@@ -180,10 +149,10 @@ export class DatabaseService {
 
     this.afs.collection('Driver').doc(id).delete().then(() => {
 
-      this.afs.collection('Bus', ref => ref.where('driverid', '==', id)).snapshotChanges().subscribe(data => {
+      this.afs.collection('ambulance', ref => ref.where('driverId', '==', id)).snapshotChanges().subscribe(data => {
         for (const d of data) {
-          this.afs.collection('Bus').doc(d.payload.doc.id).update({
-            driverid: ''
+          this.afs.collection('ambulance').doc(d.payload.doc.id).update({
+            driverId: ''
           }).then(() => {
             this.auth.isVisible = false;
 
@@ -203,11 +172,11 @@ export class DatabaseService {
     this.drivers = this.drivers.filter(driver => driver.id !== id);
   }
 
-  deleteBus(id) {
+  deleteambulance(id) {
     this.auth.isVisible = true;
 
-    this.afs.collection('Bus').doc(id).delete().then(() => {
-      this.snackBar.open('Bus is deleted', '', {
+    this.afs.collection('ambulance').doc(id).delete().then(() => {
+      this.snackBar.open('ambulance is deleted', '', {
         duration: 3000,
         horizontalPosition: 'end',
         verticalPosition: 'top'
@@ -287,34 +256,32 @@ export class DatabaseService {
     });
   }
 
-  updateBus(id, regno, pass, drid) {
+  updateambulance(id, regno, pass, drid) {
 
     this.auth.isVisible = true;
 
     if (drid !== '' && drid !== undefined) {
       if (this.searchAssignedDrivers(drid)) {
-        this.snackBar.open('Bus driver cannot be assigned to more than 1 bus', '', {
+        this.snackBar.open('Ambulance driver cannot be assigned to more than 1 ambulance', '', {
           duration: 5000,
           horizontalPosition: 'end',
           verticalPosition: 'top'
 
         });
 
-        this.afs.collection('Bus').doc(id).update({
+        this.afs.collection('ambulance').doc(id).update({
           regno,
           numPassangers: pass,
         }).then(() => {
-          this.snackBar.open('Bus is updated', '', {
+          this.snackBar.open('ambulance is updated', '', {
             duration: 3000,
             horizontalPosition: 'end',
             verticalPosition: 'top'
           });
 
-          this.buses.filter(bus => {
-            if (bus.id === id) {
-              bus.regno = regno;
-
-              bus.numPassagners = pass;
+          this.ambulances.filter(ambulance => {
+            if (ambulance.id === id) {
+              ambulance.regno = regno;
             }
           });
 
@@ -324,30 +291,27 @@ export class DatabaseService {
         this.auth.isVisible = false;
       } else {
 
-        this.buses.filter(bus => {
-          if (bus.id === id) {
-            bus.driverid = drid;
+        this.ambulances.filter(ambulance => {
+          if (ambulance.id === id) {
+            ambulance.driverId = drid;
           }
         });
 
-        this.afs.collection('Bus').doc(id).update({
+        this.afs.collection('ambulance').doc(id).update({
           regno,
           numPassangers: pass,
-          driverid: drid
+          driverId: drid
         }).then(() => {
-          this.snackBar.open('Bus is updated', '', {
+          this.snackBar.open('Ambulance is updated', '', {
             duration: 3000,
             horizontalPosition: 'end',
             verticalPosition: 'top'
           });
 
-          this.buses.filter(bus => {
-            if (bus.id === id) {
-              bus.regno = regno;
-
-              bus.numPassagners = pass;
-
-              bus.driverid = drid;
+          this.ambulances.filter(ambulance => {
+            if (ambulance.id === id) {
+              ambulance.regno = regno;
+              ambulance.driverId = drid;
             }
           });
 
@@ -356,11 +320,11 @@ export class DatabaseService {
       }
     } else {
 
-      this.afs.collection('Bus').doc(id).update({
+      this.afs.collection('ambulance').doc(id).update({
         regno,
         numPassangers: pass
       }).then(() => {
-        this.snackBar.open('Bus is updated', '', {
+        this.snackBar.open('ambulance is updated', '', {
           duration: 3000,
           horizontalPosition: 'end',
           verticalPosition: 'top'
@@ -399,34 +363,33 @@ export class DatabaseService {
     return false;
   }
 
-  getBuss() {
-    this.afs.collection('Bus').snapshotChanges().subscribe(data => {
+  getAmbulances() {
+    this.afs.collection('ambulance').snapshotChanges().subscribe(data => {
       for (const dr of data) {
         const id = dr.payload.doc.id;
-        const busdata: any = dr.payload.doc.data();
+        const ambulancedata: any = dr.payload.doc.data();
+        if (ambulancedata.driverId === '' || ambulancedata.driverId === undefined) {
 
-        if (busdata.driverid === '' || busdata.driverid === undefined) {
+          const ambulance = new Ambulance(id, ambulancedata.regno, ambulancedata.status, '');
 
-          const bus = new Bus(id, busdata.regno, '', busdata.numPassangers);
-
-          if (!this.searchBus(bus)) {
-            this.buses.push(bus);
-
+          if (!this.searchambulance(ambulance)) {
+            this.ambulances.push(ambulance);
           }
 
         } else {
 
-          this.afs.collection('driver').doc(busdata.driverid).snapshotChanges().subscribe(drData => {
+          this.afs.collection('driver').doc(ambulancedata.driverId).snapshotChanges().subscribe(drData => {
 
             const driverdata: any = drData.payload.data();
 
-            const driver = new Driver(busdata.driverid, driverdata.firstname, driverdata.lastname, driverdata.phone, driverdata.email);
+            const driver = new Driver(ambulancedata.driverId, driverdata.firstname,
+              driverdata.lastname, driverdata.phone, driverdata.email);
 
-            const bus = new Bus(id, busdata.regno, driver.id, busdata.numPassangers);
+            const ambulance = new Ambulance(id, ambulancedata.regno, ambulancedata.status, driver.id);
 
-            if (!this.searchBus(bus)) {
+            if (!this.searchambulance(ambulance)) {
 
-              this.buses.push(bus);
+              this.ambulances.push(ambulance);
 
             }
 
@@ -434,15 +397,12 @@ export class DatabaseService {
         }
 
       }
-
-
-
     });
   }
 
-  searchBus(bus: Bus) {
-    for (const dr of this.buses) {
-      if (dr.id === bus.id) {
+  searchambulance(ambulance: Ambulance) {
+    for (const dr of this.ambulances) {
+      if (dr.id === ambulance.id) {
         return true;
       }
     }
@@ -450,19 +410,24 @@ export class DatabaseService {
   }
 
   deleteAllDrivers(id) {
-    this.afs.collection('Driver').doc(id).delete();
+    this.afs.collection('driver').doc(id).delete();
   }
 
-  deleteAllBuses(id) {
-    this.afs.collection('Bus').doc(id).delete();
+  deleteAllambulances(id) {
+    this.afs.collection('ambulance').doc(id).delete();
+    this.snackBar.open('Ambulance is deleted', '', {
+      duration: 3000,
+      horizontalPosition: 'end',
+      verticalPosition: 'top'
+    });
+
   }
+
+  deleteAmbulance(id) {
+    this.afs.collection('ambulance').doc(id).delete();
+  }
+
   deleteAllBookings(id) {
     this.afs.collection('Booking').doc(id).delete();
   }
-
-  deleteAllSlots(id) {
-    this.afs.collection('Slot').doc(id).delete();
-  }
-
-
 }

@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AddbusComponent } from './components/addbus/addbus.component';
+import { AddAmbulanceComponent } from './components/addambulance/addambulance.component';
 import { AdddriverComponent } from './components/adddriver/adddriver.component';
-import { AddslotComponent } from './components/addslot/addslot.component';
 import { AddstudentComponent } from './components/addstudent/addstudent.component';
 import { BookingComponent } from './components/booking/booking.component';
-import { BusComponent } from './components/bus/bus.component';
+import { AmbulanceComponent } from './components/ambulance/ambulance.component';
 import { HomePage } from './components/home/home.page';
 import { DriverComponent } from './components/driver/driver.component';
 import { StudentComponent } from './components/student/student.component';
@@ -43,24 +42,14 @@ const routes: Routes = [
         component: DriverComponent
       },
       {
-        path: 'adddriver',
-        component: AdddriverComponent
-      },
-      {
-        path: 'bus',
-        component: BusComponent
+        path: 'ambulances',
+        component: AmbulanceComponent
       },
 
       {
         path: 'addbus',
-        component: AddbusComponent
+        component: AddAmbulanceComponent
       },
-
-      {
-        path: 'addslot',
-        component: AddslotComponent
-      },
-
       {
         path: 'student',
         component: StudentComponent

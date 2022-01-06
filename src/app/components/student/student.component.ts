@@ -158,7 +158,7 @@ export class StudentComponent implements OnInit, AfterViewInit {
 
       if (this.selecedtAll) {
         for (const student of this.dataSource.filteredData) {
-          this.dbs.deleteAllSlots(student.id);
+          // this.dbs.deleteAllSlots(student.id);
         }
         this.snackBar.open('Students deleted', '', {
           duration: 3000,
@@ -176,7 +176,7 @@ export class StudentComponent implements OnInit, AfterViewInit {
 
       } else {
         for (const student of this.students) {
-          this.dbs.deleteAllSlots(student.id);
+          // this.dbs.deleteAllSlots(student.id);
         }
         this.snackBar.open('Students deleted', '', {
           duration: 3000,

@@ -14,7 +14,6 @@ export class HomePage implements OnInit, AfterViewInit {
   constructor(public dbs: DatabaseService) { }
 
   ngOnInit() {
-    this.dbs.getBuss();
   }
 
   ngAfterViewInit() {
@@ -58,18 +57,18 @@ export class HomePage implements OnInit, AfterViewInit {
 
     } else if (cat === 'b') {
 
-      console.log(this.dbs.buses);
+      console.log(this.dbs.ambulances);
 
-      name = 'Buses Report.pdf';
+      name = 'Ambulances Report.pdf';
 
-      doc.text('BUSES REPORT', 115, 20);
+      doc.text('Ambulances REPORT', 115, 20);
 
       doc.cell(48, 40, 110, 10, 'Id'.toUpperCase(), index, 'left');
       doc.cell(48, 40, 80, 10, 'Registration No'.toUpperCase(), index, 'left');
 
       index++;
 
-      for (const bus of this.dbs.buses) {
+      for (const bus of this.dbs.ambulances) {
 
         doc.cell(48, 40, 110, 10, bus.id, index, 'left');
         doc.cell(48, 40, 80, 10, bus.regno, index, 'left');
