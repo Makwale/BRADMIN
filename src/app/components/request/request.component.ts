@@ -8,6 +8,7 @@ import { DatabaseService } from 'src/app/services/database.service';
 import { jsPDF } from 'jspdf';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-request',
@@ -26,8 +27,12 @@ export class RequestComponent implements OnInit, AfterViewInit {
   isIndeterminate = false;
   selecedtAll = false;
 
-  constructor(private dbs: DatabaseService, private afs: AngularFirestore,
-    public dialog: MatDialog, private snackBar: MatSnackBar) {
+  constructor(
+    private dbs: DatabaseService,
+    private afs: AngularFirestore,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -178,6 +183,10 @@ export class RequestComponent implements OnInit, AfterViewInit {
 
     }
 
+  }
+
+  requestDetails(id: string) {
+    this.router.navigate(['home/requests/' + id]);
   }
 
 }

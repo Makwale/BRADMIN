@@ -7,12 +7,14 @@ import { RequestComponent } from './components/request/request.component';
 import { AmbulanceComponent } from './components/ambulance/ambulance.component';
 import { HomePage } from './components/home/home.page';
 import { DriverComponent } from './components/driver/driver.component';
-import { UserComponent } from './components/student/user.component';
+import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { UnauthComponent } from './components/unauth/unauth.component';
 import { AccountComponent } from './components/account/account.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { RequestDetailsComponent } from './components/request-details/request-details.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
 
 const routes: Routes = [
   {
@@ -51,8 +53,12 @@ const routes: Routes = [
         component: AddAmbulanceComponent
       },
       {
-        path: 'student',
+        path: 'users',
         component: UserComponent
+      },
+      {
+        path: 'users/:id',
+        component: UserDetailsComponent
       },
 
       {
@@ -61,8 +67,12 @@ const routes: Routes = [
       },
 
       {
-        path: 'booking',
+        path: 'requests',
         component: RequestComponent
+      },
+      {
+        path: 'requests/:id',
+        component: RequestDetailsComponent
       },
       {
         path: 'account',

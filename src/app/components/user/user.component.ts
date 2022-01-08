@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import jsPDF from 'jspdf';
 import { User } from 'src/app/models/user.model';
 import { DatabaseService } from 'src/app/services/database.service';
@@ -25,8 +26,11 @@ export class UserComponent implements OnInit, AfterViewInit {
   isIndeterminate = false;
   selecedtAll = false;
 
-  constructor(private dbs: DatabaseService, private afs: AngularFirestore,
-    private snackBar: MatSnackBar) {
+  constructor(
+    private dbs: DatabaseService,
+    private afs: AngularFirestore,
+    private snackBar: MatSnackBar,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -99,6 +103,10 @@ export class UserComponent implements OnInit, AfterViewInit {
       this.selected = false;
     }
 
+  }
+
+  userDetails(id: string) {
+    this.router.navigate(['home/users/' + id]);
   }
 
   generateReport() {

@@ -447,7 +447,6 @@ export class DatabaseService {
         this.requests.push(new Request(d.payload.doc.id,
           (d.payload.doc.data() as any).status, (d.payload.doc.data() as any).createdAt));
       }
-      console.log(this.requests);
     });
   }
 }

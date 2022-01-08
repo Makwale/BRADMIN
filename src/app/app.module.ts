@@ -35,7 +35,7 @@ import { DriverComponent } from './components/driver/driver.component';
 import { AmbulanceComponent } from './components/ambulance/ambulance.component';
 import { AdddriverComponent } from './components/adddriver/adddriver.component';
 import { AddAmbulanceComponent } from './components/addambulance/addambulance.component';
-import { UserComponent } from './components/student/user.component';
+import { UserComponent } from './components/user/user.component';
 import { AddstudentComponent } from './components/addstudent/addstudent.component';
 import { RequestComponent } from './components/request/request.component';
 
@@ -45,6 +45,9 @@ import { AmbulanceEditComponent } from './components/ambulanceedit/ambulanceedit
 import { LoginComponent } from './components/login/login.component';
 import { UnauthComponent } from './components/unauth/unauth.component';
 import { AccountComponent } from './components/account/account.component';
+import { RequestDetailsComponent } from './components/request-details/request-details.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { Location } from '@angular/common';
 const firebaseConfig = {
   apiKey: 'AIzaSyCsKBwG7VSGwF9G0SMTLr0ZMjdHPubr9jE',
   authDomain: 'ampipalm.firebaseapp.com',
@@ -63,10 +66,12 @@ const firebaseConfig = {
     AdddriverComponent,
     AddAmbulanceComponent,
     UserComponent,
+    UserDetailsComponent,
     AddstudentComponent,
     DrivereditComponent,
     AmbulanceEditComponent,
     RequestComponent,
+    RequestDetailsComponent,
     LoginComponent,
     AccountComponent],
   entryComponents: [DrivereditComponent],
