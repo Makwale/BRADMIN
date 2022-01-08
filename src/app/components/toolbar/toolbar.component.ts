@@ -14,12 +14,13 @@ import { ProfileComponent } from '../profile/profile.component';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor(private afa: AngularFireAuth, private router: Router, private auth: AuthService,
-    private dbs: DatabaseService, public popoverController: PopoverController, private acs: AccountService) { }
+  constructor(
+    public afa: AngularFireAuth, public router: Router, public auth: AuthService,
+    public dbs: DatabaseService, public popoverController: PopoverController, public acs: AccountService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  async profile(event){
+  async profile(event) {
     const popover = await this.popoverController.create({
       component: ProfileComponent,
       cssClass: 'my-custom-class',

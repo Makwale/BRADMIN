@@ -72,6 +72,10 @@ export class RequestComponent implements OnInit, AfterViewInit {
 
   }
 
+  applyFilter(value) {
+    this.dataSource.filter = value;
+  }
+
   checkAll(checked) {
 
     this.isIndeterminate = false;

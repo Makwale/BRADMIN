@@ -69,11 +69,10 @@ export class AmbulanceComponent implements OnInit, AfterViewInit {
     }
   }
 
-  addAmbulance(ambulance) {
+  addAmbulance() {
     const dialogRef = this.dialog.open(AddAmbulanceComponent, {
       height: '250px',
       width: '450px',
-      data: ambulance
     });
   }
   openDialog(ambulance) {

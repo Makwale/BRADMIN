@@ -27,6 +27,7 @@ export class DriverComponent implements OnInit, AfterViewInit {
   selected = false;
   isIndeterminate = false;
   selecedtAll = false;
+  isVisible = false;
   constructor(private dbs: DatabaseService,
     private afs: AngularFirestore,
     public dialog: MatDialog,

@@ -19,8 +19,8 @@ export class AddAmbulanceComponent implements OnInit {
   drivers: Driver[] = [];
   driverid;
 
-  constructor(private router: Router, public auth: AuthService,
-    private dbs: DatabaseService, private afs: AngularFirestore) { }
+  constructor(public router: Router, public auth: AuthService,
+    public dbs: DatabaseService, public afs: AngularFirestore) { }
 
   ngOnInit() {
     this.getDrivers();
