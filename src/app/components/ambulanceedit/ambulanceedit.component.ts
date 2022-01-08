@@ -42,7 +42,7 @@ export class AmbulanceEditComponent implements OnInit {
 
   save() {
 
-    this.dbs.updateambulance(this.ambulance.id, this.signupForm.value.regno,
+    this.dbs.updateAmbulance(this.ambulance.id, this.signupForm.value.regno,
       this.signupForm.value.numPassengers, this.signupForm.value.driverid);
 
   }

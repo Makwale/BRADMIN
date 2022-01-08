@@ -104,26 +104,22 @@ export class HomePage implements OnInit, AfterViewInit {
     } else if (cat === 'st') {
 
 
-      name = 'Students Report.pdf';
+      name = 'users Report.pdf';
 
-      doc.text('STUDENTS REPORT', 115, 20);
+      doc.text('users REPORT', 115, 20);
 
       doc.cell(10, 40, 110, 10, 'Id'.toUpperCase(), index, 'left');
       doc.cell(10, 40, 55, 10, 'First Name'.toUpperCase(), index, 'left');
       doc.cell(10, 40, 55, 10, 'Last Name'.toUpperCase(), index, 'left');
-      doc.cell(10, 40, 55, 10, 'Student No'.toUpperCase(), index, 'left');
+      doc.cell(10, 40, 55, 10, 'user No'.toUpperCase(), index, 'left');
 
       index++;
 
-      for (const student of this.dbs.students) {
+      for (const user of this.dbs.users) {
 
-        doc.cell(10, 40, 110, 10, student.id, index, 'left');
-        doc.cell(10, 40, 55, 10, student.firstname.toUpperCase(), index, 'left');
-        doc.cell(10, 40, 55, 10, student.lastname.toUpperCase(), index, 'left');
-        doc.cell(10, 40, 55, 10, student.studentNumber ?
-          String(student.studentNumber) : 'N/A', index, 'left');
-
-
+        doc.cell(10, 40, 110, 10, user.id, index, 'left');
+        doc.cell(10, 40, 55, 10, user.firstname.toUpperCase(), index, 'left');
+        doc.cell(10, 40, 55, 10, user.lastname.toUpperCase(), index, 'left');
         index++;
       }
 
@@ -136,24 +132,22 @@ export class HomePage implements OnInit, AfterViewInit {
       doc.cell(10, 40, 80, 10, 'Id', index, 'left');
       doc.cell(10, 40, 70, 10, 'Booking Date & time'.toUpperCase(), index, 'left');
       doc.cell(10, 40, 70, 10, 'Initial & Last Name'.toUpperCase(), index, 'left');
-      doc.cell(10, 40, 50, 10, 'Student No'.toUpperCase(), index, 'left');
+      doc.cell(10, 40, 50, 10, 'user No'.toUpperCase(), index, 'left');
 
       index++;
 
-      for (const booking of this.dbs.bookings) {
+      // for (const booking of this.dbs.bookings) {
 
-        doc.cell(10, 40, 80, 10, booking.id, index, 'left');
-        doc.cell(10, 40, 70, 10, booking.date.toLocaleString(), index, 'left');
-        doc.cell(10, 40, 70, 10, `${booking.student.firstname.toUpperCase().substring(0, 1)} 
-        ${booking.student.lastname.toUpperCase()}`, index, 'left');
-        doc.cell(10, 40, 50, 10, String(booking.student.studentNumber), index, 'left');
+      //   doc.cell(10, 40, 80, 10, booking.id, index, 'left');
+      //   doc.cell(10, 40, 70, 10, booking.date.toLocaleString(), index, 'left');
+      //   doc.cell(10, 40, 70, 10, `${booking.user.firstname.toUpperCase().substring(0, 1)} 
+      //   ${booking.user.lastname.toUpperCase()}`, index, 'left');
+      //   doc.cell(10, 40, 50, 10, String(booking.user.userNumber), index, 'left');
 
-        index++;
-      }
+      //   index++;
+      // }
 
     }
-
-
 
     doc.save(name);
 

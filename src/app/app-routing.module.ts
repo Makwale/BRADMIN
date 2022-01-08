@@ -3,11 +3,11 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AddAmbulanceComponent } from './components/addambulance/addambulance.component';
 import { AdddriverComponent } from './components/adddriver/adddriver.component';
 import { AddstudentComponent } from './components/addstudent/addstudent.component';
-import { BookingComponent } from './components/booking/booking.component';
+import { RequestComponent } from './components/request/request.component';
 import { AmbulanceComponent } from './components/ambulance/ambulance.component';
 import { HomePage } from './components/home/home.page';
 import { DriverComponent } from './components/driver/driver.component';
-import { StudentComponent } from './components/student/student.component';
+import { UserComponent } from './components/student/user.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { UnauthComponent } from './components/unauth/unauth.component';
@@ -52,7 +52,7 @@ const routes: Routes = [
       },
       {
         path: 'student',
-        component: StudentComponent
+        component: UserComponent
       },
 
       {
@@ -62,7 +62,7 @@ const routes: Routes = [
 
       {
         path: 'booking',
-        component: BookingComponent
+        component: RequestComponent
       },
       {
         path: 'account',
@@ -74,10 +74,6 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent
   },
-  {
-    path: 'slotbooking',
-    loadChildren: () => import('./slotbooking/slotbooking.module').then(m => m.SlotbookingPageModule)
-  }
 ];
 
 @NgModule({

@@ -35,9 +35,9 @@ import { DriverComponent } from './components/driver/driver.component';
 import { AmbulanceComponent } from './components/ambulance/ambulance.component';
 import { AdddriverComponent } from './components/adddriver/adddriver.component';
 import { AddAmbulanceComponent } from './components/addambulance/addambulance.component';
-import { StudentComponent } from './components/student/student.component';
+import { UserComponent } from './components/student/user.component';
 import { AddstudentComponent } from './components/addstudent/addstudent.component';
-import { BookingComponent } from './components/booking/booking.component';
+import { RequestComponent } from './components/request/request.component';
 
 import { MatDialog } from '@angular/material/dialog';
 import { DrivereditComponent } from './components/driveredit/driveredit.component';
@@ -45,8 +45,6 @@ import { AmbulanceEditComponent } from './components/ambulanceedit/ambulanceedit
 import { LoginComponent } from './components/login/login.component';
 import { UnauthComponent } from './components/unauth/unauth.component';
 import { AccountComponent } from './components/account/account.component';
-import { SlotbookingPageModule } from './slotbooking/slotbooking.module';
-
 const firebaseConfig = {
   apiKey: 'AIzaSyCsKBwG7VSGwF9G0SMTLr0ZMjdHPubr9jE',
   authDomain: 'ampipalm.firebaseapp.com',
@@ -64,11 +62,11 @@ const firebaseConfig = {
     AmbulanceComponent,
     AdddriverComponent,
     AddAmbulanceComponent,
-    StudentComponent,
+    UserComponent,
     AddstudentComponent,
     DrivereditComponent,
     AmbulanceEditComponent,
-    BookingComponent,
+    RequestComponent,
     LoginComponent,
     AccountComponent],
   entryComponents: [DrivereditComponent],
@@ -89,7 +87,6 @@ const firebaseConfig = {
     MatProgressBarModule,
     MatSnackBarModule,
     MatCheckboxModule,
-    SlotbookingPageModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,

@@ -2,24 +2,22 @@ import { Injectable } from '@angular/core';
 import { Driver } from '../models/driver.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { Student } from '../models/student.model';
 import { Slot } from '../models/slot.model';
-import { Booking } from '../models/booking.model';
+import { Request as Request } from '../models/request.model';
 import { Ambulance } from '../models/ambulance.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from './auth.service';
 import { AccountService } from './account.service';
 import { Router } from '@angular/router';
-
+import { User } from '../models/user.model';
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
-
   drivers: Driver[] = [];
-  students: Student[] = [];
+  users: User[] = [];
   slots: Slot[] = [];
-  bookings: Booking[] = [];
+  requests: Request[] = [];
   ambulances: Ambulance[] = [];
   isToolbarVisible = false;
 
@@ -60,7 +58,6 @@ export class DatabaseService {
         duration: 3000,
         horizontalPosition: 'end',
         verticalPosition: 'top'
-
       });
 
     });
@@ -147,7 +144,7 @@ export class DatabaseService {
 
     this.auth.isVisible = true;
 
-    this.afs.collection('Driver').doc(id).delete().then(() => {
+    this.afs.collection('driver').doc(id).delete().then(() => {
 
       this.afs.collection('ambulance', ref => ref.where('driverId', '==', id)).snapshotChanges().subscribe(data => {
         for (const d of data) {
@@ -225,7 +222,7 @@ export class DatabaseService {
       }
     });
 
-    this.students = this.students.filter(student => student.id !== id);
+    this.users = this.users.filter(student => student.id !== id);
   }
 
   updateDriver(id, firstname, lastname, phone) {
@@ -256,7 +253,7 @@ export class DatabaseService {
     });
   }
 
-  updateambulance(id, regno, pass, drid) {
+  updateAmbulance(id, regno, pass, drid) {
 
     this.auth.isVisible = true;
 
@@ -400,6 +397,15 @@ export class DatabaseService {
     });
   }
 
+  getUsers() {
+    this.afs.collection('user').snapshotChanges().subscribe(data => {
+      for (const d of data) {
+        this.users.push(new User(d.payload.doc.id,
+          (d.payload.doc.data() as any).firstname, (d.payload.doc.data() as any).lastname, (d.payload.doc.data() as any).email));
+      }
+    });
+  }
+
   searchambulance(ambulance: Ambulance) {
     for (const dr of this.ambulances) {
       if (dr.id === ambulance.id) {
@@ -427,7 +433,21 @@ export class DatabaseService {
     this.afs.collection('ambulance').doc(id).delete();
   }
 
-  deleteAllBookings(id) {
+  deleteAllrequests(id) {
     this.afs.collection('Booking').doc(id).delete();
+  }
+
+  deleteUser(id: any) {
+    throw new Error('Method not implemented.');
+  }
+
+  getRequests() {
+    this.afs.collection('ambulance_request').snapshotChanges().subscribe(data => {
+      for (const d of data) {
+        this.requests.push(new Request(d.payload.doc.id,
+          (d.payload.doc.data() as any).status, (d.payload.doc.data() as any).createdAt));
+      }
+      console.log(this.requests);
+    });
   }
 }
