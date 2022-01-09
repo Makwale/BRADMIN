@@ -33,8 +33,8 @@
                 <ion-select color="ourtheme" value="bus.driverid" formControlName="driverid" cancelText="Cancel"
                   okText="Done" style="width: 400px;">
                   <ion-select-option style="width: 800px;" *ngFor="let driver of drivers" [value]="driver.id">
-                    {{driver.id.substring(0,3)}}....{{ driver.id.substring(driver.id.length - 3) }}
-                    {{driver.firstname.substring(0,1)}} {{driver.lastname}}</ion-select-option>
+                    {{driver?.id?.substring(0,3)}}....{{ driver?.id?.substring(driver?.id?.length - 3) }}
+                    {{driver?.firstname?.substring(0,1)}} {{driver?.lastname}}</ion-select-option>
                 </ion-select>
               </ion-item>
             </ion-col>

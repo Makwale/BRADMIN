@@ -66,12 +66,11 @@ export class DatabaseService {
   createAmbulance(regno, id?) {
     this.auth.isVisible = true;
     console.log(regno);
-    if (this.searchambulanceByReg(regno)) {
+    if (this.searchAmbulanceByReg(regno)) {
       this.snackBar.open(`Ambulance with registration number ${regno} is already added`, '', {
         duration: 5000,
         horizontalPosition: 'end',
         verticalPosition: 'top'
-
       });
       this.auth.isVisible = false;
 
@@ -122,7 +121,7 @@ export class DatabaseService {
 
   }
 
-  searchambulanceByReg(regno) {
+  searchAmbulanceByReg(regno) {
     for (const ambulance of this.ambulances) {
       if (ambulance.regno === regno) {
         return true;
@@ -379,8 +378,8 @@ export class DatabaseService {
 
             const driverdata: any = drData.payload.data();
 
-            const driver = new Driver(ambulancedata.driverId, driverdata.firstname,
-              driverdata.lastname, driverdata.phone, driverdata.email);
+            const driver = new Driver(ambulancedata.driverId, driverdata?.firstname,
+              driverdata?.lastname, driverdata?.phone, driverdata?.email);
 
             const ambulance = new Ambulance(id, ambulancedata.regno, ambulancedata.status, driver.id);
 

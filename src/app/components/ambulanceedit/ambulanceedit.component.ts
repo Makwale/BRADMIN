@@ -62,7 +62,7 @@ export class AmbulanceEditComponent implements OnInit {
         const driverdata: any = dr.payload.doc.data();
 
         const driver = new Driver(id, driverdata.firstname, driverdata.lastname, driverdata.phone, driverdata.email);
-
+        console.log(driver);
         if (!this.searchDriver(driver)) {
           this.drivers.push(driver);
         }
