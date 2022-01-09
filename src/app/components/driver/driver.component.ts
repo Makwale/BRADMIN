@@ -42,15 +42,14 @@ export class DriverComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.isVisible = true;
     setTimeout(() => {
       this.dataSource.data = this.dbs.drivers;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.isVisible = false;
     }, 4000);
   }
-
-
-
 
   deleteDriver(id) {
     if (confirm('Are you sure you want to delete this drive')) {
@@ -128,13 +127,13 @@ export class DriverComponent implements OnInit, AfterViewInit {
       orientation: 'l',
     });
 
-    doc.text('DRIVERS REPORT', 115, 20);
+    doc?.text('DRIVERS REPORT', 115, 20);
     let index = 1;
 
-    doc.cell(10, 40, 110, 10, 'Id'.toUpperCase(), index, 'left');
-    doc.cell(10, 40, 55, 10, 'First Name'.toUpperCase(), index, 'left');
-    doc.cell(10, 40, 55, 10, 'Last Name'.toUpperCase(), index, 'left');
-    doc.cell(10, 40, 55, 10, 'Phone No'.toUpperCase(), index, 'left');
+    doc?.cell(10, 40, 110, 10, 'Id'.toUpperCase(), index, 'left');
+    doc?.cell(10, 40, 55, 10, 'First Name'.toUpperCase(), index, 'left');
+    doc?.cell(10, 40, 55, 10, 'Last Name'.toUpperCase(), index, 'left');
+    doc?.cell(10, 40, 55, 10, 'Phone No'.toUpperCase(), index, 'left');
 
     index++;
 
@@ -143,31 +142,25 @@ export class DriverComponent implements OnInit, AfterViewInit {
 
       for (const driver of this.dataSource.filteredData) {
 
-        doc.cell(10, 40, 110, 10, driver.id, index, 'left');
-        doc.cell(10, 40, 55, 10, driver.firstname.toUpperCase(), index, 'left');
-        doc.cell(10, 40, 55, 10, driver.lastname.toUpperCase(), index, 'left');
-        doc.cell(10, 40, 55, 10, `0${driver.phone}`, index, 'left');
-
-
+        doc?.cell(10, 40, 110, 10, driver?.id, index, 'left');
+        doc?.cell(10, 40, 55, 10, driver?.firstname?.toUpperCase(), index, 'left');
+        doc?.cell(10, 40, 55, 10, driver?.lastname?.toUpperCase(), index, 'left');
+        doc?.cell(10, 40, 55, 10, `${driver?.phone}`, index, 'left');
         index++;
       }
     } else {
-
-
       for (const driver of this.drivers) {
 
-        doc.cell(10, 40, 110, 10, driver.id, index, 'left');
-        doc.cell(10, 40, 55, 10, driver.firstname.toUpperCase(), index, 'left');
-        doc.cell(10, 40, 55, 10, driver.lastname.toUpperCase(), index, 'left');
-        doc.cell(10, 40, 55, 10, `0${driver.phone}`, index, 'left');
-
-
+        doc?.cell(10, 40, 110, 10, driver?.id, index, 'left');
+        doc?.cell(10, 40, 55, 10, driver?.firstname?.toUpperCase(), index, 'left');
+        doc?.cell(10, 40, 55, 10, driver?.lastname?.toUpperCase(), index, 'left');
+        doc?.cell(10, 40, 55, 10, `${driver?.phone}`, index, 'left');
         index++;
       }
     }
 
 
-    doc.save('Drivers Report.pdf');
+    doc?.save('Drivers Report.pdf');
 
 
   }

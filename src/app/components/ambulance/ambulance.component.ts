@@ -126,7 +126,7 @@ export class AmbulanceComponent implements OnInit, AfterViewInit {
       orientation: 'l',
     });
 
-    doc.text('ambulances REPORT', 115, 20);
+    doc.text('Ambulances REPORT', 115, 20);
     let index = 1;
 
     doc.cell(48, 40, 110, 10, 'Id'.toUpperCase(), index, 'left');
@@ -154,7 +154,7 @@ export class AmbulanceComponent implements OnInit, AfterViewInit {
       }
 
     }
-    doc.save('ambulances Report.pdf');
+    doc.save('Ambulances Report.pdf');
   }
 
   deleteSelected() {
@@ -166,7 +166,7 @@ export class AmbulanceComponent implements OnInit, AfterViewInit {
         for (const ambulance of this.dataSource.filteredData) {
           this.dbs.deleteAllambulances(ambulance.id);
         }
-        this.snackBar.open('ambulances deleted', '', {
+        this.snackBar.open('Ambulances deleted', '', {
           duration: 5000,
           horizontalPosition: 'end',
           verticalPosition: 'top'
@@ -185,7 +185,7 @@ export class AmbulanceComponent implements OnInit, AfterViewInit {
           this.dbs.deleteAllambulances(ambulance.id);
 
         }
-        this.snackBar.open('ambulances deleted', '', {
+        this.snackBar.open('Ambulances deleted', '', {
           duration: 5000,
           horizontalPosition: 'end',
           verticalPosition: 'top'

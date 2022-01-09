@@ -115,15 +115,13 @@ export class UserComponent implements OnInit, AfterViewInit {
       orientation: 'l',
     });
 
-    doc.text('users REPORT', 115, 20);
+    doc.text('Users REPORT', 115, 20);
 
     let index = 1;
 
     doc.cell(10, 40, 110, 10, 'Id'.toUpperCase(), index, 'left');
     doc.cell(10, 40, 55, 10, 'First Name'.toUpperCase(), index, 'left');
     doc.cell(10, 40, 55, 10, 'Last Name'.toUpperCase(), index, 'left');
-    doc.cell(10, 40, 55, 10, 'user No'.toUpperCase(), index, 'left');
-
     index++;
 
     if (this.selecedtAll) {
@@ -147,7 +145,7 @@ export class UserComponent implements OnInit, AfterViewInit {
         index++;
       }
     }
-    doc.save('users Report.pdf');
+    doc.save('Users Report.pdf');
   }
 
   deleteSelected() {
@@ -159,7 +157,7 @@ export class UserComponent implements OnInit, AfterViewInit {
         for (const user of this.dataSource.filteredData) {
           // this.dbs.deleteAllSlots(user.id);
         }
-        this.snackBar.open('users deleted', '', {
+        this.snackBar.open('Users deleted', '', {
           duration: 3000,
           horizontalPosition: 'end',
           verticalPosition: 'top'
@@ -177,7 +175,7 @@ export class UserComponent implements OnInit, AfterViewInit {
         for (const user of this.users) {
           // this.dbs.deleteAllSlots(user.id);
         }
-        this.snackBar.open('users deleted', '', {
+        this.snackBar.open('Users deleted', '', {
           duration: 3000,
           horizontalPosition: 'end',
           verticalPosition: 'top'

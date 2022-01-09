@@ -114,8 +114,6 @@ export class DatabaseService {
           this.auth.isVisible = false;
         });
       }
-
-
     }
 
 

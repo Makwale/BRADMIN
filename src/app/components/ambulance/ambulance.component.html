@@ -14,7 +14,7 @@
       placeholder="Search ambulances by id or registration number" #input>
   </mat-form-field>
 
-  <mat-progress-bar *ngIf="isVisible" style="width: 90%; margin: auto;" mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar *ngIf="isVisible" style="width: 90%; margin: auto;" mode="buffer"></mat-progress-bar>
 
 
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 90%; margin: auto;">
