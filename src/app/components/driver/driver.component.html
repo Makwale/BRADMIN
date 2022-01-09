@@ -2,7 +2,7 @@
   <div class="row mt-5 " style="padding-left: 55px;">
     <div class="col-2 ">
       <span class="h4 ml-3">Drivers</span>
-      <button mat-mini-fab style="margin-left: 15px;" (click)="addDriver()">
+      <button mat-mini-fab style="margin-left: 15px; background-color: #f5757a;" (click)="addDriver()">
         <mat-icon>add</mat-icon>
       </button>
     </div>
@@ -14,7 +14,8 @@
   </mat-form-field>
 
 
-  <mat-progress-bar *ngIf="isVisible" style="width: 90%; margin: auto;" mode="buffer"></mat-progress-bar>
+  <mat-progress-bar *ngIf="isVisible" style="width: 90%; margin: auto; background-color: #f5757a;" mode="buffer">
+  </mat-progress-bar>
 
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 90%; margin: auto;">
 
@@ -72,7 +73,7 @@
       <td mat-cell *matCellDef="let element">
         <button (click)="openDialog(element)" mat-icon-button
           aria-label="Example icon button with a vertical three dot icon">
-          <mat-icon style="color: #0a4694;">edit</mat-icon>
+          <mat-icon style="color: #0a9411;">edit</mat-icon>
         </button>
 
         <button (click)="deleteDriver(element.id)" mat-icon-button
@@ -90,4 +91,6 @@
       <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
     </tr>
   </table>
+  <mat-paginator [pageSizeOptions]="[10,15,20]" style="margin-right: 39px; color: #f5757a;"></mat-paginator>
+
 </div>

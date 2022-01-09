@@ -149,7 +149,6 @@ export class UserComponent implements OnInit, AfterViewInit {
   }
 
   deleteSelected() {
-
     if (confirm('Are you sure you want to delete seleted users?')) {
       this.isIndeterminate = false;
 

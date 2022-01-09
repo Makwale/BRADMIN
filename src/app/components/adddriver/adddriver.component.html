@@ -153,8 +153,8 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" (click)="create()" cdkFocusInitial
+  <button mat-button style="color: #04081f;" mat-dialog-close>Cancel</button>
+  <button mat-stroked-button [mat-dialog-close]="true" style="color: #f5757a;" (click)="create()" cdkFocusInitial
     [disabled]="signupForm.status === 'INVALID'">
     <ion-spinner *ngIf="auth.isVisible" name="bubbles"></ion-spinner>
     <span *ngIf="!auth.isVisible">Add</span>

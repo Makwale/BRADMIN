@@ -129,11 +129,16 @@
 
     </form>
     <div style="text-align: center; padding-top: 10px;">
-      <ion-button slot="end" color="ourtheme" (click)="update()"
+      <!-- <ion-button slot="end" color="ourtheme" (click)="update()"
         [disabled]="signupForm.status === 'INVALID' || !signupForm.touched" style="margin: auto;"><span
           *ngIf="!auth.isVisible">Update</span>
         <ion-spinner *ngIf="auth.isVisible" name="bubbles"></ion-spinner>
-      </ion-button>
+      </ion-button> -->
+      <button style="color: #f5757a;" [disabled]="signupForm.status === 'INVALID' || !signupForm.touched"
+        mat-stroked-button>
+        <span>Update</span>
+        <ion-spinner *ngIf="auth.isVisible" name="bubbles"></ion-spinner>
+      </button>
     </div>
 
   </div>

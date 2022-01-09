@@ -1,13 +1,6 @@
-<mat-toolbar style="height: 80px; background-color: #031b36">
+<mat-toolbar style="height: 80px; background-color: #04081f">
 
   <span style="color: #fff;">Ambipalm Admin</span>
   <span class="example-spacer"></span>
-  <ion-button color="light" *ngIf="acs.loginStatus" (click)="profile($event)">
-    <ion-avatar style="height: 25px; width: 25px;">
-      <img src="..//..//..//assets/profile.png">
-    </ion-avatar>
-    <ion-icon color="ourtheme" name="chevron-down"></ion-icon>
-  </ion-button>
-
-
+  <a style="background-color: #04081f; color: #fff;" mat-flat-button (click)="signout()">Logout</a>
 </mat-toolbar>

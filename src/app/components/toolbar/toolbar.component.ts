@@ -16,7 +16,9 @@ export class ToolbarComponent implements OnInit {
 
   constructor(
     public afa: AngularFireAuth, public router: Router, public auth: AuthService,
-    public dbs: DatabaseService, public popoverController: PopoverController, public acs: AccountService) { }
+    public dbs: DatabaseService,
+    public popoverController: PopoverController,
+    public acs: AccountService) { }
 
   ngOnInit() { }
 
@@ -25,9 +27,20 @@ export class ToolbarComponent implements OnInit {
       component: ProfileComponent,
       cssClass: 'my-custom-class',
       translucent: true,
-      event: event
     });
     await popover.present();
+  }
 
+  signout() {
+    this.router.navigateByUrl('');
+    this.afa.signOut().then(res => {
+      this.acs.loginStatus = false;
+      this.dbs.isToolbarVisible = false;
+      this.auth.isAuthorised = false;
+      this.acs.user = null;
+
+    });
+
+    this.popoverController.dismiss();
   }
 }

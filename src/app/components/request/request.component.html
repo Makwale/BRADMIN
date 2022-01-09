@@ -9,7 +9,8 @@
     <input matInput (keyup)="applyFilter(filter.value)" #filter placeholder="Search booking by id or date" #input>
   </mat-form-field>
 
-  <mat-progress-bar *ngIf="isVisible" style="width: 90%; margin: auto;" mode="buffer"></mat-progress-bar>
+  <mat-progress-bar *ngIf="isVisible" style="width: 90%; margin: auto; background-color: #f5757a;" mode="buffer">
+  </mat-progress-bar>
 
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 90%; margin: auto;">
 
@@ -62,5 +63,5 @@
     </tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[10,15,20]"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[10,15,20]" style="margin-right: 39px; color: #f5757a;"></mat-paginator>
 </div>

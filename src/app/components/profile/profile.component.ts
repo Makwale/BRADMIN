@@ -17,25 +17,12 @@ export class ProfileComponent implements OnInit {
     private acs: AccountService, public popoverController: PopoverController,
     private dbs: DatabaseService, private auth: AuthService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  navigate(){
-    this.router.navigateByUrl("home/account")
+  navigate() {
+    this.router.navigateByUrl('home/account');
 
-    this.popoverController.dismiss()
-  }
-
-  signout(){
-    this.router.navigateByUrl("")
-    this.afa.signOut().then(res => {
-      this.acs.loginStatus = false;
-      this.dbs.isToolbarVisible = false;
-      this.auth.isAuthorised = false;
-      this.acs.user = null;
-      
-    })
-
-    this.popoverController.dismiss()
+    this.popoverController.dismiss();
   }
 
 }
