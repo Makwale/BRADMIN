@@ -89,7 +89,8 @@ export class DatabaseService {
           this.afs.collection('ambulance').add({
             regno,
             driverId: id,
-            status: 'available'
+            status: 'unavailable',
+            geo: [0, 0],
           }).then(() => {
             this.snackBar.open('ambulance is added', '', {
               duration: 3000,
@@ -104,7 +105,8 @@ export class DatabaseService {
         this.afs.collection('ambulance').add({
           regno,
           driverId: '',
-          status: 'available'
+          status: 'unavailable',
+          geo: [0, 0]
         }).then(() => {
           this.snackBar.open('Ambulance is added', '', {
             duration: 3000,
