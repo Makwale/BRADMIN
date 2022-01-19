@@ -98,13 +98,12 @@ export class RequestComponent implements OnInit, AfterViewInit {
       orientation: 'l',
     });
 
-    doc.text('requests REPORT', 115, 20);
+    doc.text('REQUEST REPORT', 115, 20);
     let index = 1;
 
     doc.cell(10, 40, 80, 10, 'Id', index, 'left');
-    doc.cell(10, 40, 70, 10, 'request Date & time'.toUpperCase(), index, 'left');
-    doc.cell(10, 40, 70, 10, 'Initial & Last Name'.toUpperCase(), index, 'left');
-    doc.cell(10, 40, 50, 10, 'request No'.toUpperCase(), index, 'left');
+    doc.cell(10, 40, 70, 10, 'Date & time'.toUpperCase(), index, 'left');
+    doc.cell(10, 40, 70, 10, 'Status'.toUpperCase(), index, 'left');
 
     index++;
 
@@ -114,11 +113,9 @@ export class RequestComponent implements OnInit, AfterViewInit {
 
       for (const request of this.dataSource.filteredData) {
 
-        // doc.cell(10, 40, 80, 10, request.id, index, 'left');
-        // doc.cell(10, 40, 70, 10, request.date.toLocaleString(), index, 'left');
-        // doc.cell(10, 40, 70, 10, `${request.student.firstname.toUpperCase().substring(0, 1)} 
-        // ${request.student.lastname.toUpperCase()}`, index, 'left');
-        // doc.cell(10, 40, 50, 10, String(request.student.studentNumber), index, 'left');
+        doc.cell(10, 40, 80, 10, request.id, index, 'left');
+        doc.cell(10, 40, 70, 10, request.date.toLocaleString(), index, 'left');
+        doc.cell(10, 40, 70, 10, request.status, index, 'left');
 
         index++;
       }
@@ -126,18 +123,16 @@ export class RequestComponent implements OnInit, AfterViewInit {
 
       for (const requestt of this.requests) {
 
-        // doc.cell(10, 40, 80, 10, request.id, index, 'left');
-        // doc.cell(10, 40, 70, 10, request.date.toLocaleString(), index, 'left');
-        // doc.cell(10, 40, 70, 10, `${request.student.firstname.toUpperCase().substring(0, 1)} 
-        // ${request.student.lastname.toUpperCase()}`, index, 'left');
-        // doc.cell(10, 40, 50, 10, String(request.student.studentNumber), index, 'left');
+        doc.cell(10, 40, 80, 10, requestt.id, index, 'left');
+        doc.cell(10, 40, 70, 10, requestt.date.toLocaleString(), index, 'left');
+        doc.cell(10, 40, 70, 10, requestt.status, index, 'left');
 
         index++;
       }
     }
 
 
-    doc.save('requests Report.pdf');
+    doc.save('Requests Report.pdf');
 
 
 
