@@ -437,7 +437,12 @@ export class DatabaseService {
   }
 
   deleteUser(id: any) {
-    throw new Error('Method not implemented.');
+    this.afs.collection('user').doc(id).delete();
+    this.snackBar.open('User is deleted', '', {
+      duration: 3000,
+      horizontalPosition: 'end',
+      verticalPosition: 'top'
+    });
   }
 
   getRequests() {
