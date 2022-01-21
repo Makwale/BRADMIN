@@ -399,10 +399,22 @@ export class DatabaseService {
   getUsers() {
     this.afs.collection('user').snapshotChanges().subscribe(data => {
       for (const d of data) {
-        this.users.push(new User(d.payload.doc.id,
-          (d.payload.doc.data() as any).firstname, (d.payload.doc.data() as any).lastname, (d.payload.doc.data() as any).email));
+        const user = new User(d.payload.doc.id,
+          (d.payload.doc.data() as any).firstname, (d.payload.doc.data() as any).lastname, (d.payload.doc.data() as any).email);
+        if (!this.searchUser(user)) {
+          this.users.push(user);
+        }
       }
     });
+  }
+
+  searchUser(use: User) {
+    for (const user of this.users) {
+      if (user.id === use.id) {
+        return true;
+      }
+    }
+    return false;
   }
 
   searchambulance(ambulance: Ambulance) {
